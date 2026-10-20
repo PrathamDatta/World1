@@ -30,8 +30,8 @@ const N = 7; // layers, matches src/data/layers.ts
 const SPACING = 0.95;
 const SIZE = 4.4;
 const THICK = 0.1;
-const LIME = new Color("#c9ff2f");
-const WHITE = new Color("#f4ffd0");
+const SKY = new Color("#75c9ff");
+const ICE = new Color("#e6f5ff");
 
 export type SceneOptions = {
   lite: boolean;
@@ -70,11 +70,11 @@ export function createStage(canvas: HTMLCanvasElement, opts: SceneOptions) {
   const root = new Group();
   scene.add(root);
 
-  scene.add(new AmbientLight(0xffffff, 0.55));
-  const key = new DirectionalLight(0xffffff, 1.4);
+  scene.add(new AmbientLight(0xb4d4ff, 0.6));
+  const key = new DirectionalLight(0xd6e9ff, 1.4);
   key.position.set(4, 8, 5);
   scene.add(key);
-  const glow = new PointLight(LIME, 14, 9, 1.6);
+  const glow = new PointLight(SKY, 14, 9, 1.6);
   scene.add(glow);
 
   // ---- plates ----------------------------------------------------------
@@ -94,9 +94,9 @@ export function createStage(canvas: HTMLCanvasElement, opts: SceneOptions) {
   const plates: Plate[] = [];
   for (let i = 0; i < N; i++) {
     const group = new Group();
-    const mat = new MeshStandardMaterial({ color: "#1b1e20", metalness: 0.7, roughness: 0.42, transparent: true, opacity: 0.9 });
-    const edge = new LineBasicMaterial({ color: LIME, transparent: true, opacity: 0.6 });
-    const grid = new LineBasicMaterial({ color: LIME, transparent: true, opacity: 0.12 });
+    const mat = new MeshStandardMaterial({ color: "#0d1f3b", metalness: 0.7, roughness: 0.42, transparent: true, opacity: 0.9 });
+    const edge = new LineBasicMaterial({ color: SKY, transparent: true, opacity: 0.8 });
+    const grid = new LineBasicMaterial({ color: SKY, transparent: true, opacity: 0.12 });
     group.add(new Mesh(plateGeo, mat), new LineSegments(edgeGeo, edge), new LineSegments(gridGeo, grid));
     root.add(group);
     plates.push({ group, mat, edge, grid, lift: 0, vis: 0 });
@@ -111,8 +111,8 @@ export function createStage(canvas: HTMLCanvasElement, opts: SceneOptions) {
       nodePos.push({ x: (rand() - 0.5) * (SIZE - 0.9), z: (rand() - 0.5) * (SIZE - 0.9), layer: l });
     }
   }
-  const nodeGeo = new OctahedronGeometry(0.052);
-  const nodeMat = new MeshBasicMaterial({ color: LIME });
+  const nodeGeo = new OctahedronGeometry(0.058);
+  const nodeMat = new MeshBasicMaterial({ color: SKY });
   const nodes = new InstancedMesh(nodeGeo, nodeMat, nodePos.length);
   root.add(nodes);
 
@@ -136,7 +136,7 @@ export function createStage(canvas: HTMLCanvasElement, opts: SceneOptions) {
   }
   const beamGeo = new BufferGeometry();
   beamGeo.setAttribute("position", new Float32BufferAttribute(beamPts, 3));
-  const beamMat = new LineBasicMaterial({ color: LIME, transparent: true, opacity: 0.22 });
+  const beamMat = new LineBasicMaterial({ color: SKY, transparent: true, opacity: 0.22 });
   root.add(new LineSegments(beamGeo, beamMat));
 
   const pulseCount = lite ? 14 : 34;
@@ -144,7 +144,7 @@ export function createStage(canvas: HTMLCanvasElement, opts: SceneOptions) {
   const pulsePos = new Float32Array(pulseCount * 3);
   pulseGeo.setAttribute("position", new Float32BufferAttribute(pulsePos, 3));
   const pulseState = Array.from({ length: pulseCount }, () => ({ beam: Math.floor(rand() * beams.length), t: rand(), v: 0.18 + rand() * 0.3 }));
-  const pulseMat = new PointsMaterial({ color: WHITE, size: 0.11, sizeAttenuation: true, transparent: true, opacity: 0.95, blending: AdditiveBlending, depthWrite: false });
+  const pulseMat = new PointsMaterial({ color: ICE, size: 0.11, sizeAttenuation: true, transparent: true, opacity: 0.95, blending: AdditiveBlending, depthWrite: false });
   root.add(new Points(pulseGeo, pulseMat));
 
   // ---- camera / interaction state -------------------------------------
@@ -221,16 +221,16 @@ export function createStage(canvas: HTMLCanvasElement, opts: SceneOptions) {
       p.lift += ((isActive ? 0.22 : 0) - p.lift) * (snap ? 1 : 1 - Math.exp(-dt * 6));
       p.group.position.y = layerY(i) + p.lift + (1 - p.vis) * 3.2;
       p.mat.opacity = 0.9 * p.vis * (dim ? 0.55 : 1);
-      p.edge.opacity = p.vis * (isActive ? 1 : dim ? 0.28 : 0.6);
-      p.edge.color.copy(isActive ? WHITE : LIME);
-      p.grid.opacity = p.vis * (isActive ? 0.32 : 0.12);
+      p.edge.opacity = p.vis * (isActive ? 1 : dim ? 0.36 : 0.82);
+      p.edge.color.copy(isActive ? ICE : SKY);
+      p.grid.opacity = p.vis * (isActive ? 0.42 : 0.18);
     }
     if (active >= 0) {
       glow.position.set(0, layerY(active) + 0.9, 0);
-      glow.intensity = 14;
+      glow.intensity = 22;
     } else {
       glow.position.set(0, 2.6, 0);
-      glow.intensity = 6;
+      glow.intensity = 9;
     }
     // nodes
     for (let i = 0; i < nodePos.length; i++) {

@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import PageSchema from "@/components/PageSchema";
+import AtAGlance from "@/components/AtAGlance";
+import RelatedServices from "@/components/RelatedServices";
+import FaqSection from "@/components/FaqSection";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
 import HostingCompare from "@/components/HostingCompare";
@@ -6,10 +11,7 @@ import PageHero from "@/components/PageHero";
 import PartnerLogo from "@/components/PartnerLogo";
 import Tabs from "@/components/Tabs";
 
-export const metadata: Metadata = {
-  title: "Cloud Hosting Services",
-  description: "Public cloud, private cloud and SAP S/4 HANA cloud hosting from AdINET Infosystems, Bengaluru.",
-};
+export const metadata: Metadata = pageMetadata("cloud");
 
 const options = [
   {
@@ -37,6 +39,8 @@ export default function Cloud() {
         title="Cloud Hosting Services"
         intro="Choose a cloud that flexes like elastic. Rather than being hosted on one single instance of a physical server, your website is hosted on a virtual partition that draws on shared resources."
       />
+      <PageSchema page="cloud" />
+      <AtAGlance page="cloud" />
       <section className="section" aria-labelledby="opts-title">
         <div className="wrap">
           <div className="section-head">
@@ -70,6 +74,8 @@ export default function Cloud() {
           <HostingCompare />
         </div>
       </section>
+      <FaqSection page="cloud" tone="paper" />
+      <RelatedServices page="cloud" />
       <CtaBand title="Find the right cloud for your workload" text="Describe what you need to run and our team will recommend public, private or SAP HANA hosting." />
     </>
   );

@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
-
-const routes = ["", "/about", "/domains", "/it-support", "/cloud", "/web-hosting", "/email", "/website-design", "/custom-web-apps", "/security", "/contact"];
+import { pageList } from "@/data/pages";
+import { abs, isIndexable, siteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
 
+// Lists every public, indexable route once, at its canonical (no trailing slash) URL. lastModified is omitted on purpose: there is no reliable per-page edit date.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL;
-  if (!base) return [];
-  return routes.map((r) => ({ url: `${base}${r}` }));
+  const base = siteUrl();
+  if (!base || !isIndexable()) return [];
+  return pageList.map((p) => ({ url: abs(p.path) }));
 }

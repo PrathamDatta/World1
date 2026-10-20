@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import PageSchema from "@/components/PageSchema";
+import AtAGlance from "@/components/AtAGlance";
+import RelatedServices from "@/components/RelatedServices";
+import FaqSection from "@/components/FaqSection";
 import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
 import PartnerLogo from "@/components/PartnerLogo";
 import type { PartnerKey } from "@/data/partners";
 
-export const metadata: Metadata = {
-  title: "Security & Addons",
-  description: "SSL certificates, website security and website backup add-ons from AdINET Infosystems.",
-};
+export const metadata: Metadata = pageMetadata("security");
 
 const items = [
   { logo: "comodo" as PartnerKey, vendor: "Comodo SSL", name: "SSL Certificate", text: "Our certificates protect your personal data, including passwords, credit cards and identity information." },
@@ -18,7 +20,9 @@ const items = [
 export default function Security() {
   return (
     <>
-      <PageHero layer={4} title="Security & Addons" intro="Protect your website, your visitors’ data and your content with these add-on services." />
+      <PageHero layer={4} title="SSL, Security & Backup Addons" intro="Protect your website, your visitors’ data and your content with these add-on services." />
+      <PageSchema page="security" />
+      <AtAGlance page="security" />
       <section className="section">
         <div className="wrap grid-3">
           {items.map((i) => (
@@ -32,6 +36,8 @@ export default function Security() {
           ))}
         </div>
       </section>
+      <FaqSection page="security" tone="paper" />
+      <RelatedServices page="security" />
       <CtaBand title="Add protection to your site" text="Ask us which security and backup add-ons suit your website." />
     </>
   );

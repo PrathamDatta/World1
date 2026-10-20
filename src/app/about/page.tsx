@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import PageSchema from "@/components/PageSchema";
+import AtAGlance from "@/components/AtAGlance";
+import RelatedServices from "@/components/RelatedServices";
 import CtaBand from "@/components/CtaBand";
 import OrgDiagram from "@/components/OrgDiagram";
 import PageHero from "@/components/PageHero";
 
-export const metadata: Metadata = {
-  title: "About us",
-  description: "AdINET Infosystems is a Bengaluru IT services company offering total and cost-effective IT solutions, backed by a team of experienced professionals.",
-};
+export const metadata: Metadata = pageMetadata("about");
 
 export default function About() {
   return (
@@ -15,6 +16,8 @@ export default function About() {
         title="About AdINET Infosystems"
         intro="A young and dynamic Bengaluru organisation offering total and cost-effective IT solutions."
       />
+      <PageSchema page="about" />
+      <AtAGlance page="about" />
       <section className="section">
         <div className="wrap split">
           <div>
@@ -51,6 +54,7 @@ export default function About() {
           </p>
         </div>
       </section>
+      <RelatedServices page="about" />
       <CtaBand />
     </>
   );

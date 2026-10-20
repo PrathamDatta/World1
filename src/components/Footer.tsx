@@ -21,6 +21,10 @@ export default function Footer() {
             <li><Link href="/about">About us</Link></li>
             <li><Link href="/contact">Contact us</Link></li>
           </ul>
+          <p className="footer-about">
+            {company.name} is a {company.location}-based IT services provider: cloud and web hosting, business email,
+            domains, IT support, website design and custom web applications.
+          </p>
         </div>
         <div className="contact-card">
           <h2>{company.name}</h2>

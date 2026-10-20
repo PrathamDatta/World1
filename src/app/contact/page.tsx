@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import PageSchema from "@/components/PageSchema";
 import { Suspense } from "react";
 import ContactForm from "@/components/ContactForm";
 import PageHero from "@/components/PageHero";
 import { company } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: "Contact us",
-  description: "Contact AdINET Infosystems in Bengaluru for domains, hosting, email, IT support and web development enquiries.",
-};
+export const metadata: Metadata = pageMetadata("contact");
 
 export default function Contact() {
   return (
     <>
       <PageHero title="Contact us" intro="Tell us what you need and our team will get back to you." />
+      <PageSchema page="contact" />
       <section className="section">
         <div className="wrap split split--wide-left">
           <Suspense fallback={null}>

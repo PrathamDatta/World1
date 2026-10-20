@@ -25,6 +25,9 @@ Page metadata, canonical URLs, JSON-LD, the sitemap, `/llms.txt` and the visible
 - Production origin: set `NEXT_PUBLIC_SITE_URL` (e.g. `https://www.example.in`) once a custom domain is live. On Vercel the production URL is picked up automatically via `VERCEL_PROJECT_PRODUCTION_URL`. With neither, canonical URLs and the sitemap are omitted.
 - Vercel preview deployments are automatically `noindex` with a disallow-all `robots.txt`.
 
+## Cookie consent
+`CookieBar` (bottom bar) stores the visitor's choice in one first-party cookie, `adinet_consent` (`accepted` or `rejected`, 180 days, `SameSite=Lax`, `Secure` on https). The footer's "Cookie settings" button reopens it. The site currently sets no analytics or marketing cookies; when any are added, gate them with `hasOptionalConsent()` from `src/lib/consent.ts`. Update the bar's wording if non-essential cookies are introduced, and have the company confirm any legal requirements for their audience.
+
 ## Configuration
 - `NEXT_PUBLIC_SITE_URL`: see SEO and GEO above.
 

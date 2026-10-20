@@ -1,10 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/inter";
-import "@fontsource-variable/manrope";
+import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageEffects from "@/components/PageEffects";
 import { company } from "@/data/site";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: { type: "website", siteName: company.name, locale: "en_IN" },
 };
 
-export const viewport: Viewport = { themeColor: "#090947", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#070a13", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -27,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <WhatsAppButton />
+        <PageEffects />
       </body>
     </html>
   );

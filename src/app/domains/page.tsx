@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
 import DomainSearch from "@/components/DomainSearch";
+import Accordion from "@/components/Accordion";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
@@ -28,8 +29,8 @@ export default function Domains() {
       />
       <section className="section">
         <div className="wrap">
-          <div className="panel panel--white">
-            <h2 style={{ fontSize: "1.4rem" }}>Check a domain name</h2>
+          <div className="domain-box">
+            <h2>Check a domain name</h2>
             <DomainSearch />
             <p className="note" style={{ marginTop: 14, marginBottom: 0 }}>For example: google.com</p>
           </div>
@@ -77,6 +78,23 @@ export default function Domains() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+      <section className="section" aria-labelledby="faq-title">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow">Questions</p>
+            <h2 id="faq-title">Managed domains, answered</h2>
+          </div>
+          <Accordion
+            items={[
+              { q: "What is the managed domain service?", a: <p>An AdINET initiative that helps customers renew domains on time and avoid the redemption/restoration cycle. It is a fully managed service handled by our dedicated staff.</p> },
+              { q: "When will I be reminded?", a: <p>Telephone and email reminders start 60 days before renewal, including calls at 30 days and 15 days before expiry.</p> },
+              { q: "What does it cost?", a: <p>₹300 per domain name registration, in addition to the domain registration fee. Prices and features are subject to change without prior notice.</p> },
+              { q: "Which extensions can I register?", a: <p>.com, .net, .org, .info, .biz, .co.uk, .co.in, .in, .name, .uk, .tv and .mobi.</p> },
+              { q: "Can I check if a name is free right now?", a: <p>Not on this website yet. Enter the name above and send it to our team, and we will confirm availability and registration details.</p> },
+            ]}
+          />
         </div>
       </section>
       <CtaBand title="Register or transfer a domain" text="Tell us the name you want and we will confirm availability and next steps." />

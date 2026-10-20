@@ -13,6 +13,11 @@ npm run lint && npm run typecheck && npm run build && npm start
 2. Set the production branch to `main`; every push then deploys automatically and PRs get preview URLs.
 3. Optional: add `NEXT_PUBLIC_SITE_URL` (your final domain) under Settings → Environment Variables, then add the domain under Settings → Domains.
 
+## Interactions & motion
+No animation library: transitions are CSS (opacity/transform only), scroll reveals use one IntersectionObserver (`PageEffects`), and everything respects `prefers-reduced-motion`.
+- Header: hover/click/keyboard/touch dropdowns (arrow keys, Escape, outside click, focus-out), animated mobile menu, sticky header that compacts on scroll.
+- Home: interactive service map, goal-based solution selector (tabs). Cloud: tabs and a single-server vs virtual-partition diagram. FAQ accordions on Domains, Web Hosting and IT Support. Email comparison table. Back-to-top, card spotlight hover.
+
 ## Configuration
 - `NEXT_PUBLIC_SITE_URL` (e.g. `https://www.example.in`): enables absolute metadata, `sitemap.xml` and the robots sitemap line. Not set by default because the production domain is not confirmed.
 

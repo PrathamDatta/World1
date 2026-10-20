@@ -18,6 +18,19 @@ export default function CustomWebApps() {
         title="Custom Web Application Development"
         intro="AdINET’s in-house team can execute a project from initial requirement analysis, application study and prototype through to home page design, hosting, e-business planning, design and implementation."
       />
+      <section className="section section--navy" aria-labelledby="stages-title">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow">How a project runs</p>
+            <h2 id="stages-title">From requirements to implementation</h2>
+          </div>
+          <ol className="stages" style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {["Initial requirement analysis", "Application study", "Application prototype", "Home page design and hosting", "E-business planning", "Design and implementation"].map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ol>
+        </div>
+      </section>
       <section className="section">
         <div className="wrap split">
           <div className="stack">

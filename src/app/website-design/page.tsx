@@ -12,21 +12,21 @@ export const metadata: Metadata = {
 function Wire({ mobile }: { mobile?: boolean }) {
   return mobile ? (
     <svg viewBox="0 0 120 200" width="110" style={{ margin: "0 auto" }} role="img" aria-label="Mobile website wireframe">
-      <rect x="4" y="4" width="112" height="192" rx="14" fill="#fff" stroke="#0f0f66" strokeWidth="3" />
-      <rect x="16" y="24" width="88" height="46" rx="4" fill="#0f0f66" />
-      <rect x="16" y="82" width="88" height="8" rx="3" fill="#c9cde6" />
-      <rect x="16" y="98" width="62" height="8" rx="3" fill="#c9cde6" />
-      <rect x="16" y="120" width="40" height="40" rx="4" fill="#2fb8e8" />
-      <rect x="64" y="120" width="40" height="40" rx="4" fill="#c8202a" />
+      <rect x="4" y="4" width="112" height="192" rx="14" fill="#fff" stroke="#131b31" strokeWidth="3" />
+      <rect x="16" y="24" width="88" height="46" rx="4" fill="#131b31" />
+      <rect x="16" y="82" width="88" height="8" rx="3" fill="#d9d5c9" />
+      <rect x="16" y="98" width="62" height="8" rx="3" fill="#d9d5c9" />
+      <rect x="16" y="120" width="40" height="40" rx="4" fill="#7d97ff" />
+      <rect x="64" y="120" width="40" height="40" rx="4" fill="#ff5a4e" />
     </svg>
   ) : (
     <svg viewBox="0 0 200 140" width="190" style={{ margin: "0 auto" }} role="img" aria-label="Website wireframe">
-      <rect x="4" y="4" width="192" height="132" rx="8" fill="#fff" stroke="#0f0f66" strokeWidth="3" />
-      <rect x="4" y="4" width="192" height="20" rx="8" fill="#0f0f66" />
-      <rect x="16" y="36" width="168" height="40" rx="4" fill="#2fb8e8" opacity=".85" />
-      <rect x="16" y="88" width="50" height="34" rx="4" fill="#c9cde6" />
-      <rect x="75" y="88" width="50" height="34" rx="4" fill="#c9cde6" />
-      <rect x="134" y="88" width="50" height="34" rx="4" fill="#c9cde6" />
+      <rect x="4" y="4" width="192" height="132" rx="8" fill="#fff" stroke="#131b31" strokeWidth="3" />
+      <rect x="4" y="4" width="192" height="20" rx="8" fill="#131b31" />
+      <rect x="16" y="36" width="168" height="40" rx="4" fill="#7d97ff" opacity=".85" />
+      <rect x="16" y="88" width="50" height="34" rx="4" fill="#d9d5c9" />
+      <rect x="75" y="88" width="50" height="34" rx="4" fill="#d9d5c9" />
+      <rect x="134" y="88" width="50" height="34" rx="4" fill="#d9d5c9" />
     </svg>
   );
 }

@@ -7,7 +7,7 @@ type NavigatorWithHints = Navigator & { deviceMemory?: number; connection?: { sa
 
 export default function StageCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [state, setState] = useState<"poster" | "live" | "failed">("poster");
+  const [state, setState] = useState<"idle" | "live" | "failed">("idle");
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -52,7 +52,8 @@ export default function StageCanvas() {
 
   return (
     <div className="stage__canvas" aria-hidden="true" data-state={state}>
-      <StackGlyph className="stage__poster" />
+      {/* Nothing is drawn while the 3D scene loads; the styled drawing only appears if WebGL is unavailable. */}
+      {state === "failed" && <StackGlyph className="stage__poster glyph" />}
       <canvas ref={canvasRef} />
     </div>
   );

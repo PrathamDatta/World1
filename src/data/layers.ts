@@ -9,7 +9,7 @@ export type Layer = {
   links: { label: string; href: string }[];
 };
 
-/** The AdINET offering as a conceptual stack, foundation first. Copy is drawn from the existing AdINET site. */
+/** The ADINET offering as a conceptual stack, foundation first. Copy is drawn from the existing ADINET site. */
 export const layers: Layer[] = [
   {
     id: "cloud",

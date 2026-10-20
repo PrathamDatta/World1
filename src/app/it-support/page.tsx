@@ -59,7 +59,7 @@ export default function ItSupport() {
               complex integration projects.
             </p>
             <p>
-              AdINET offers monthly, six-month and one-year support agreements to meet your business needs. We are
+              ADINET offers monthly, six-month and one-year support agreements to meet your business needs. We are
               committed to delivering the best support experience with a single objective in mind: your satisfaction.
             </p>
           </div>

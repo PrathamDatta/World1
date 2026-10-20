@@ -19,7 +19,7 @@ export default function CustomWebApps() {
       <PageHero
         layer={5}
         title="Custom Web Application Development"
-        intro="AdINET’s in-house team can execute a project from initial requirement analysis, application study and prototype through to home page design, hosting, e-business planning, design and implementation."
+        intro="ADINET’s in-house team can execute a project from initial requirement analysis, application study and prototype through to home page design, hosting, e-business planning, design and implementation."
       />
       <PageSchema page="customWebApps" />
       <AtAGlance page="customWebApps" />
@@ -52,7 +52,7 @@ export default function CustomWebApps() {
             <p className="eyebrow">Our team</p>
             <h2 style={{ fontSize: "1.5rem" }}>Built around the client</h2>
             <p>
-              The AdINET team comprises best-of-breed professionals with in-depth knowledge in their respective areas.
+              The ADINET team comprises best-of-breed professionals with in-depth knowledge in their respective areas.
               Each project is organised around you, the client.
             </p>
             <OrgDiagram />

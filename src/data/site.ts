@@ -1,6 +1,6 @@
 export const company = {
-  name: "AdINET Infosystems",
-  shortName: "AdINET",
+  name: "ADINET INFOSYSTEMS",
+  shortName: "ADINET",
   location: "Bengaluru",
   email: "sales@adinet.in",
   phone: "+91 9986003120",

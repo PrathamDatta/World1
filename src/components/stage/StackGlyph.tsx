@@ -11,7 +11,7 @@ export default function StackGlyph({
   const plates = Array.from({ length: 7 }, (_, i) => i);
   return (
     <svg
-      viewBox="0 0 240 250"
+      viewBox="0 20 240 282"
       className={className}
       role={title ? "img" : undefined}
       aria-label={title}

@@ -1,4 +1,4 @@
-# AdINET Infosystems website
+# ADINET INFOSYSTEMS website
 
 Next.js 16 (App Router) + TypeScript. Content is based on the existing adinet website screenshots.
 
@@ -14,7 +14,7 @@ npm run lint && npm run typecheck && npm run build && npm start
 3. Optional: add `NEXT_PUBLIC_SITE_URL` (your final domain) under Settings → Environment Variables, then add the domain under Settings → Domains.
 
 ## Creative system
-- Concept: **The Stack**. AdINET's services layer on each other (cloud, hosting, domains, email, security, web & apps, IT support). A three.js scene renders that as seven plates; a sticky canvas stays behind the hero and the scroll story, and the camera climbs the stack as you scroll. It is a conceptual map, not a diagram of real infrastructure.
+- Concept: **The Stack**. ADINET's services layer on each other (cloud, hosting, domains, email, security, web & apps, IT support). A three.js scene renders that as seven plates; a sticky canvas stays behind the hero and the scroll story, and the camera climbs the stack as you scroll. It is a conceptual map, not a diagram of real infrastructure.
 - 3D: `three` only (no React wrapper), lazy-loaded about 1s after load, paused when off-screen or the tab is hidden, pixel ratio capped, resources disposed on unmount. SVG poster/fallback when WebGL is unavailable. Software renderers and slow devices fall back to a static on-demand mode; `prefers-reduced-motion` gets static frames.
 - Motion: CSS transitions + one IntersectionObserver + one rAF-throttled scroll loop. No animation library (GSAP was considered and left out: nothing here needs pinning/scrubbing).
 - Type: Geist (display/body), Geist Mono (labels), Instrument Serif italic (accents), self-hosted via `next/font/local` in `src/fonts`.

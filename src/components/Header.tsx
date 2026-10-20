@@ -187,7 +187,7 @@ export default function Header() {
           <Image src={asset("/brand/adinet-logo.png")} alt="" width={74} height={61} priority />
           <span>
             {company.shortName}
-            <small>{company.location}</small>
+            <small>INFOSYSTEMS</small>
           </span>
         </Link>
 

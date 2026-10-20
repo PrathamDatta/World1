@@ -59,14 +59,14 @@ export default function Domains() {
               <h2>Never lose a domain to a missed renewal</h2>
               <p>
                 Restoring a domain that has gone into redemption, or losing a valuable domain because an email reminder
-                was missed, can be costly. AdINET’s managed domain registration service makes this much easier to
+                was missed, can be costly. ADINET’s managed domain registration service makes this much easier to
                 prevent, at very modest rates.
               </p>
             </div>
             <div>
               <h2>What is the managed service?</h2>
               <p>
-                It is an AdINET initiative that helps customers renew their domains on time and avoid the
+                It is an ADINET initiative that helps customers renew their domains on time and avoid the
                 redemption/restoration cycle. Subscribers receive telephone calls and email reminders ahead of renewal,
                 including calls at 30 days and 15 days before expiry.
               </p>

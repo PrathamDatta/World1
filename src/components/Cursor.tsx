@@ -26,10 +26,12 @@ export default function Cursor() {
       if (!on) { on = true; rx = x; ry = y; el.dataset.on = "true"; }
       if (!raf) raf = requestAnimationFrame(loop);
       const t = e.target as HTMLElement | null;
+      // Regions marked data-cursor-off keep the plain system cursor: no ring, no label.
+      const off = t?.closest("[data-cursor-off]");
       const hit = t?.closest<HTMLElement>("[data-cursor], a, button, [role=tab], select, summary");
       const text = t?.closest("input, textarea");
-      el.dataset.state = text ? "text" : hit ? "link" : "idle";
-      const custom = hit?.dataset.cursor;
+      el.dataset.state = off ? "off" : text ? "text" : hit ? "link" : "idle";
+      const custom = off ? undefined : hit?.dataset.cursor;
       if (label.current) label.current.textContent = custom ?? "";
       el.dataset.label = custom ? "true" : "false";
     };

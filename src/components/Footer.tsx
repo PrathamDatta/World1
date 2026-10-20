@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { company, footerServices } from "@/data/site";
+import CookieSettingsButton from "./CookieSettingsButton";
 
 export default function Footer() {
   return (
@@ -44,6 +45,7 @@ export default function Footer() {
             <Link href="/">Home</Link>
             <Link href="/about">About Us</Link>
             <Link href="/contact">Contact Us</Link>
+            <CookieSettingsButton />
           </span>
         </div>
       </div>

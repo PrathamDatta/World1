@@ -1,0 +1,46 @@
+import Link from "next/link";
+import { company, footerServices } from "@/data/site";
+
+export default function Footer() {
+  return (
+    <footer className="site-footer">
+      <div className="wrap footer-grid">
+        <div>
+          <h2>Services</h2>
+          <ul>
+            {footerServices.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href}>{l.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2>Company</h2>
+          <ul>
+            <li><Link href="/about">About us</Link></li>
+            <li><Link href="/contact">Contact us</Link></li>
+          </ul>
+        </div>
+        <div className="contact-card">
+          <h2>{company.name}</h2>
+          <ul>
+            <li>{company.location}</li>
+            <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
+            <li><a href={company.phoneHref}>{company.phone}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div className="footer-bar">
+        <div className="wrap footer-bar__inner">
+          <span>© {new Date().getFullYear()} {company.name}, {company.location}</span>
+          <span>
+            <Link href="/">Home</Link>
+            <Link href="/about">About Us</Link>
+            <Link href="/contact">Contact Us</Link>
+          </span>
+        </div>
+      </div>
+    </footer>
+  );
+}

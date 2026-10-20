@@ -33,6 +33,7 @@ export default function Cloud() {
   return (
     <>
       <PageHero
+        layer={0}
         title="Cloud Hosting Services"
         intro="Choose a cloud that flexes like elastic. Rather than being hosted on one single instance of a physical server, your website is hosted on a virtual partition that draws on shared resources."
       />

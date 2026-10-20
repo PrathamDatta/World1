@@ -18,7 +18,7 @@ const items = [
 export default function Security() {
   return (
     <>
-      <PageHero title="Security & Addons" intro="Protect your website, your visitors’ data and your content with these add-on services." />
+      <PageHero layer={4} title="Security & Addons" intro="Protect your website, your visitors’ data and your content with these add-on services." />
       <section className="section">
         <div className="wrap grid-3">
           {items.map((i) => (

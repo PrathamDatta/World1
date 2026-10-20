@@ -25,6 +25,7 @@ export default function WebHosting() {
   return (
     <>
       <PageHero
+        layer={1}
         title="Corporate Web Hosting Packages"
         intro="High on space and low on price, without compromising on quality. Not convinced yet? Take advantage of our 30-day money-back offer, with no questions asked on cancellation."
       />

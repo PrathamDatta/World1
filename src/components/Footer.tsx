@@ -28,6 +28,7 @@ export default function Footer() {
             <li>{company.location}</li>
             <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
             <li><a href={company.phoneHref}>{company.phone}</a></li>
+            <li><a href={company.whatsappHref} target="_blank" rel="noopener noreferrer">WhatsApp {company.whatsapp}</a></li>
           </ul>
         </div>
       </div>

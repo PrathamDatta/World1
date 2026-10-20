@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
+import PartnerLogo from "@/components/PartnerLogo";
+import type { PartnerKey } from "@/data/partners";
 
 export const metadata: Metadata = {
   title: "Security & Addons",
@@ -8,9 +10,9 @@ export const metadata: Metadata = {
 };
 
 const items = [
-  { vendor: "Comodo SSL", name: "SSL Certificate", text: "Our certificates protect your personal data, including passwords, credit cards and identity information." },
-  { vendor: "SiteLock", name: "Website Security", text: "Over 5,000 websites get attacked every day. Get SiteLock and secure your website from hackers, viruses and malware." },
-  { vendor: "CodeGuard", name: "Website Backup", text: "Secure your website in just a few minutes. CodeGuard’s cloud backup lets you recover your website data instantly." },
+  { logo: "comodo" as PartnerKey, vendor: "Comodo SSL", name: "SSL Certificate", text: "Our certificates protect your personal data, including passwords, credit cards and identity information." },
+  { logo: "sitelock" as PartnerKey, vendor: "SiteLock", name: "Website Security", text: "Over 5,000 websites get attacked every day. Get SiteLock and secure your website from hackers, viruses and malware." },
+  { logo: "codeguard" as PartnerKey, vendor: "CodeGuard", name: "Website Backup", text: "Secure your website in just a few minutes. CodeGuard’s cloud backup lets you recover your website data instantly." },
 ];
 
 export default function Security() {
@@ -22,7 +24,7 @@ export default function Security() {
           {items.map((i) => (
             <article className="product" key={i.name}>
               <div className="product__body">
-                <p className="product__kind">{i.vendor}</p>
+                <PartnerLogo name={i.logo} />
                 <h2 className="product__name" style={{ fontSize: "1.35rem" }}>{i.name}</h2>
                 <p>{i.text}</p>
               </div>

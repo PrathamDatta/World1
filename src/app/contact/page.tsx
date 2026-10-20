@@ -23,6 +23,7 @@ export default async function Contact({ searchParams }: { searchParams: Promise<
               <li><span>Location</span>{company.location}</li>
               <li><span>Email</span><a href={`mailto:${company.email}`}>{company.email}</a></li>
               <li><span>Phone</span><a href={company.phoneHref}>{company.phone}</a></li>
+              <li><span>WhatsApp</span><a href={company.whatsappHref} target="_blank" rel="noopener noreferrer">{company.whatsapp}</a></li>
             </ul>
           </aside>
         </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
+import PartnerLogo from "@/components/PartnerLogo";
 
 export const metadata: Metadata = {
   title: "Website Design",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 function Wire({ mobile }: { mobile?: boolean }) {
   return mobile ? (
-    <svg viewBox="0 0 120 200" width="110" role="img" aria-label="Mobile website wireframe">
+    <svg viewBox="0 0 120 200" width="110" style={{ margin: "0 auto" }} role="img" aria-label="Mobile website wireframe">
       <rect x="4" y="4" width="112" height="192" rx="14" fill="#fff" stroke="#0f0f66" strokeWidth="3" />
       <rect x="16" y="24" width="88" height="46" rx="4" fill="#0f0f66" />
       <rect x="16" y="82" width="88" height="8" rx="3" fill="#c9cde6" />
@@ -19,7 +20,7 @@ function Wire({ mobile }: { mobile?: boolean }) {
       <rect x="64" y="120" width="40" height="40" rx="4" fill="#c8202a" />
     </svg>
   ) : (
-    <svg viewBox="0 0 200 140" width="190" role="img" aria-label="Website wireframe">
+    <svg viewBox="0 0 200 140" width="190" style={{ margin: "0 auto" }} role="img" aria-label="Website wireframe">
       <rect x="4" y="4" width="192" height="132" rx="8" fill="#fff" stroke="#0f0f66" strokeWidth="3" />
       <rect x="4" y="4" width="192" height="20" rx="8" fill="#0f0f66" />
       <rect x="16" y="36" width="168" height="40" rx="4" fill="#2fb8e8" opacity=".85" />
@@ -41,12 +42,14 @@ export default function WebsiteDesign() {
         <div className="wrap grid-2">
           <article className="panel" style={{ textAlign: "center" }}>
             <Wire />
-            <h2 style={{ marginTop: 20 }}>ResellerClub Website Builder</h2>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}><PartnerLogo name="resellerclub" /></div>
+            <h2>Website Builder</h2>
             <p>Create your own website instantly, with no coding or design skills required. Choose from ready-made themes.</p>
           </article>
           <article className="panel" style={{ textAlign: "center" }}>
             <Wire mobile />
-            <h2 style={{ marginTop: 20 }}>Impress.ly Mobile Website Builder</h2>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}><PartnerLogo name="impressly" /></div>
+            <h2>Mobile Website Builder</h2>
             <p>Quickly create an app-like website. Use social media content or start from scratch to set up your site.</p>
           </article>
         </div>

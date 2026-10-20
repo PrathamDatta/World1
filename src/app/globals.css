@@ -197,6 +197,11 @@ ul { margin: 0; padding: 0; list-style: none; }
 .footer-bar__inner { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; padding: 18px 0; }
 .footer-bar a { color: #dfe1ff; margin-left: 16px; }
 
+.logo-tile { display: inline-flex; align-items: center; background: #f2f2f2; border-radius: 6px; padding: 10px 14px; margin: 0 0 18px; }
+.logo-tile img { height: auto; width: auto; max-height: 56px; mix-blend-mode: multiply; }
+.whatsapp { position: fixed; right: 18px; bottom: 18px; z-index: 40; width: 56px; height: 56px; border-radius: 50%; background: #1fa855; display: grid; place-items: center; box-shadow: 0 6px 18px rgba(0,0,0,.3); transition: transform .2s; }
+.whatsapp:hover { transform: scale(1.06); }
+
 /* forms */
 .form { display: grid; gap: 18px; }
 .field label { display: block; font: 700 .9rem var(--font-head); margin-bottom: 6px; color: var(--navy-900); }

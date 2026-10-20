@@ -5,6 +5,8 @@ export const company = {
   email: "sales@adinet.in",
   phone: "+91 9986003120",
   phoneHref: "tel:+919986003120",
+  whatsapp: "+91 99860 03120",
+  whatsappHref: "https://wa.me/919986003120",
   tagline: "Your preferred IT partner",
 } as const;
 

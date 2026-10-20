@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
+import PartnerLogo from "@/components/PartnerLogo";
+import type { PartnerKey } from "@/data/partners";
 
 export const metadata: Metadata = {
   title: "Business Cloud Email Hosting",
@@ -9,18 +11,21 @@ export const metadata: Metadata = {
 
 const products = [
   {
+    logo: "icewarp" as PartnerKey,
     name: "IceWarp",
     kind: "Email & collaboration",
     text: "The ultimate all-in-one email and collaboration platform. Best-in-class secure email, calendar, documents and chat for teams.",
     specs: [["Deployment", "Public cloud, private cloud and software"], ["Storage", "500 MB up to 30 GB"], ["Price", "From ₹200 per mailbox per year"]],
   },
   {
+    logo: "ox" as PartnerKey,
     name: "OX",
     kind: "Business email",
     text: "Simple, powerful email for small businesses. Give your business a professional makeover with custom email addresses.",
     specs: [["Deployment", "Public cloud"], ["Storage", "5 GB"], ["Price", "₹300 per mailbox per year"]],
   },
   {
+    logo: "mdaemon" as PartnerKey,
     name: "MDaemon",
     kind: "Email server",
     text: "An email server that provides full functionality and control, installs in minutes and needs minimal support and administration. A proven email platform for businesses.",
@@ -40,6 +45,7 @@ export default function Email() {
           {products.map((p) => (
             <article className="product" key={p.name}>
               <div className="product__body">
+                <PartnerLogo name={p.logo} />
                 <h2 className="product__name">{p.name}</h2>
                 <p className="product__kind">{p.kind}</p>
                 <p>{p.text}</p>

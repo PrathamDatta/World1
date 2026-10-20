@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
+import PartnerLogo from "@/components/PartnerLogo";
 
 export const metadata: Metadata = {
   title: "Cloud Hosting Services",
@@ -40,6 +41,7 @@ export default function Cloud() {
                 <span className="num">0{i + 1}</span>
                 <div>
                   <h3>{o.name}</h3>
+                  {o.name === "SAP HANA" && <PartnerLogo name="saphana" />}
                   <p className="eyebrow" style={{ margin: "6px 0 0" }}>{o.kind}</p>
                 </div>
                 <p>{o.text}</p>

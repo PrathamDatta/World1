@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
 import DomainSearch from "@/components/DomainSearch";
 import Accordion from "@/components/Accordion";
+import Marquee from "@/components/Marquee";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function Domains() {
   return (
     <>
       <PageHero
+        layer={2}
         title="Domain Name Registration"
         intro="Select your internet domain name and we will take care of the rest, with a fully managed service by our expert team."
       />
@@ -36,6 +38,7 @@ export default function Domains() {
           </div>
         </div>
       </section>
+      <Marquee outline items={tlds} />
       <section className="section section--mist" style={{ paddingTop: 56 }}>
         <div className="wrap split">
           <div className="stack">

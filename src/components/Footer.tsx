@@ -32,6 +32,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
+      <div className="footer-mark" aria-hidden="true" data-parallax>AdINET</div>
       <div className="footer-bar">
         <div className="wrap footer-bar__inner">
           <span>© {new Date().getFullYear()} {company.name}, {company.location}</span>

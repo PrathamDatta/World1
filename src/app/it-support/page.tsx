@@ -26,7 +26,7 @@ const cols = [
 export default function ItSupport() {
   return (
     <>
-      <PageHero title="IT Support Services" intro="Simplifying technology for your business, with onsite and online support on agreements that fit your needs." />
+      <PageHero layer={6} title="IT Support Services" intro="Simplifying technology for your business, with onsite and online support on agreements that fit your needs." />
       <section className="section">
         <div className="wrap">
           <div className="grid-3">

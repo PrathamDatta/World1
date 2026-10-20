@@ -13,10 +13,12 @@ npm run lint && npm run typecheck && npm run build && npm start
 2. Set the production branch to `main`; every push then deploys automatically and PRs get preview URLs.
 3. Optional: add `NEXT_PUBLIC_SITE_URL` (your final domain) under Settings → Environment Variables, then add the domain under Settings → Domains.
 
-## Interactions & motion
-No animation library: transitions are CSS (opacity/transform only), scroll reveals use one IntersectionObserver (`PageEffects`), and everything respects `prefers-reduced-motion`.
-- Header: hover/click/keyboard/touch dropdowns (arrow keys, Escape, outside click, focus-out), animated mobile menu, sticky header that compacts on scroll.
-- Home: interactive service map, goal-based solution selector (tabs). Cloud: tabs and a single-server vs virtual-partition diagram. FAQ accordions on Domains, Web Hosting and IT Support. Email comparison table. Back-to-top, card spotlight hover.
+## Creative system
+- Concept: **The Stack**. AdINET's services layer on each other (cloud, hosting, domains, email, security, web & apps, IT support). A three.js scene renders that as seven plates; a sticky canvas stays behind the hero and the scroll story, and the camera climbs the stack as you scroll. It is a conceptual map, not a diagram of real infrastructure.
+- 3D: `three` only (no React wrapper), lazy-loaded about 1s after load, paused when off-screen or the tab is hidden, pixel ratio capped, resources disposed on unmount. SVG poster/fallback when WebGL is unavailable. Software renderers and slow devices fall back to a static on-demand mode; `prefers-reduced-motion` gets static frames.
+- Motion: CSS transitions + one IntersectionObserver + one rAF-throttled scroll loop. No animation library (GSAP was considered and left out: nothing here needs pinning/scrubbing).
+- Type: Geist (display/body), Geist Mono (labels), Instrument Serif italic (accents), self-hosted via `next/font/local` in `src/fonts`.
+- Interaction: cursor ring (desktop mouse only, native cursor stays), magnetic buttons, card spotlight, accessible tabs/accordions, hover/click/keyboard/touch dropdowns.
 
 ## Configuration
 - `NEXT_PUBLIC_SITE_URL` (e.g. `https://www.example.in`): enables absolute metadata, `sitemap.xml` and the robots sitemap line. Not set by default because the production domain is not confirmed.

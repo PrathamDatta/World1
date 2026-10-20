@@ -37,6 +37,7 @@ export default function Email() {
   return (
     <>
       <PageHero
+        layer={3}
         title="Business Cloud Email Hosting"
         intro="Build customer trust with professional email addresses. Create as many group mailing lists as your company needs, like sales@yourcompany.com."
       />

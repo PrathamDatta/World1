@@ -1,44 +1,45 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import StackGlyph from "./StackGlyph";
 
 type NavigatorWithHints = Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
 
-export default function StageCanvas() {
+/**
+ * Fixed full-viewport sky behind the whole homepage. The CSS sky and cloud poster render immediately; the three.js
+ * cloud environment is imported lazily once the page is idle and fades in over the poster. If WebGL fails, the poster stays.
+ */
+export default function SkyCanvas() {
+  const rootRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [state, setState] = useState<"poster" | "live" | "failed">("poster");
 
   useEffect(() => {
+    const root = rootRef.current;
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!root || !canvas) return;
     let dispose: (() => void) | undefined;
     let cancelled = false;
     const nav = navigator as NavigatorWithHints;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const lite =
       !!nav.connection?.saveData ||
-      (nav.hardwareConcurrency ?? 8) <= 2 ||
       (nav.deviceMemory ?? 8) <= 2 ||
+      (nav.hardwareConcurrency ?? 8) <= 2 ||
       window.innerWidth < 700;
 
     const start = async () => {
       try {
-        const { createStage } = await import("./scene");
+        const { createSky } = await import("./sky");
         if (cancelled) return;
-        dispose = createStage(canvas, { lite, reducedMotion, onLost: () => setState("failed") });
+        dispose = createSky(canvas, root, { lite, reducedMotion, onLost: () => setState("failed") });
         setState("live");
       } catch {
         setState("failed");
       }
     };
-    // Keep the three.js bundle and shader compilation off the critical path: wait until the headline has
-    // painted (the SVG poster covers the gap), then start when the main thread is idle.
     const idle = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
     let timer = 0;
-    const kick = () => {
-      timer = window.setTimeout(() => (idle ? idle(start, { timeout: 1500 }) : start()), 1200);
-    };
+    const kick = () => { timer = window.setTimeout(() => (idle ? idle(start, { timeout: 1200 }) : start()), 250); };
     if (document.readyState === "complete") kick();
     else window.addEventListener("load", kick, { once: true });
 
@@ -51,8 +52,11 @@ export default function StageCanvas() {
   }, []);
 
   return (
-    <div className="stage__canvas" aria-hidden="true" data-state={state}>
-      <StackGlyph className="stage__poster" />
+    <div className="sky" ref={rootRef} aria-hidden="true" data-state={state}>
+      <div className="sky__calm" />
+      <div className="sky__poster">
+        <i /><i /><i /><i />
+      </div>
       <canvas ref={canvasRef} />
     </div>
   );

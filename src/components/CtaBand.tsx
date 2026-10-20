@@ -19,7 +19,7 @@ export default function CtaBand({
           <p>{text}</p>
         </div>
         <div className="btn-row">
-          <Link href="/contact" className="btn btn--dark" data-cursor="Go">Contact us</Link>
+          <Link href="/contact" className="btn btn--dark">Contact us</Link>
           <a href={company.phoneHref} className="btn btn--ghost-dark">Call {company.phone}</a>
         </div>
       </div>

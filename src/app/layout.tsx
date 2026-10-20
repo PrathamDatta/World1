@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageEffects from "@/components/PageEffects";
-import Cursor from "@/components/Cursor";
 import { company } from "@/data/site";
 import { pages } from "@/data/pages";
 import { siteGraph } from "@/lib/jsonld";
@@ -43,7 +42,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <WhatsAppButton />
         <PageEffects />
-        <Cursor />
       </body>
     </html>
   );

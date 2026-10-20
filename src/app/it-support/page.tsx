@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
+import Accordion from "@/components/Accordion";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
@@ -59,6 +60,22 @@ export default function ItSupport() {
               committed to delivering the best support experience with a single objective in mind: your satisfaction.
             </p>
           </div>
+        </div>
+      </section>
+      <section className="section" aria-labelledby="faq-title">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow">Questions</p>
+            <h2 id="faq-title">About our support</h2>
+          </div>
+          <Accordion
+            items={[
+              { q: "What agreement terms are available?", a: <p>Monthly, six-month and one-year support agreements.</p> },
+              { q: "How fast do you respond?", a: <p>Support includes one business day priority support, with rapid fault response and fix, and priority product support during normal business hours.</p> },
+              { q: "Is support onsite or remote?", a: <p>Both. We provide onsite and remote support, available by telephone or email.</p> },
+              { q: "Can you help before I buy?", a: <p>Yes. You can consult us at any stage: from pre-purchase advice to straightforward installation, and on to complex integration projects.</p> },
+            ]}
+          />
         </div>
       </section>
       <CtaBand title="Choose a support agreement" text="Tell us about your environment and we will suggest a monthly, six-month or one-year plan." />

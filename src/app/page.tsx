@@ -1,6 +1,7 @@
 import Link from "next/link";
-import CloudIllustration from "@/components/CloudIllustration";
 import CtaBand from "@/components/CtaBand";
+import ServiceMap from "@/components/ServiceMap";
+import SolutionSelector from "@/components/SolutionSelector";
 
 const services = [
   { n: "01", title: "Web & Cloud", href: "/cloud", text: "Web hosting, domain name registration and cloud servers." },
@@ -14,7 +15,7 @@ const services = [
 const reasons = [
   { t: "Total solutions under one roof", p: "Domains, hosting, email, security, support and custom development are handled by one team, so you do not have to coordinate several vendors." },
   { t: "Flexible support agreements", p: "Monthly, six-month and one-year support agreements, with onsite and online IT support." },
-  { t: "Quality through to the very end", p: "Our approach is a quality policy followed by us and by professional execution of every project until it is delivered." },
+  { t: "Quality through to the very end", p: "A quality policy followed by our whole team, and a professional approach to executing every project until it is delivered." },
   { t: "Fully managed domains", p: "Our managed domain service sends telephone and email reminders so a domain never lapses into redemption." },
 ];
 
@@ -24,22 +25,35 @@ export default function Home() {
       <section className="hero">
         <div className="wrap hero__grid">
           <div>
-            <p className="eyebrow">AdINET Infosystems · Bengaluru</p>
-            <h1>Your preferred IT partner.</h1>
-            <p className="lede">
+            <p className="eyebrow enter" style={{ ["--i" as string]: 0 }}>AdINET Infosystems · Bengaluru</p>
+            <h1 className="enter" style={{ ["--i" as string]: 1 }}>Your preferred <em>IT partner.</em></h1>
+            <p className="lede enter" style={{ ["--i" as string]: 2 }}>
               A young and dynamic organisation offering total and cost-effective IT solutions: cloud and web hosting,
               business email, domains, IT support and custom web applications.
             </p>
-            <div className="btn-row">
+            <div className="btn-row enter" style={{ ["--i" as string]: 3 }}>
               <Link href="/contact" className="btn btn--primary">Talk to our team</Link>
               <Link href="/cloud" className="btn btn--light">Explore cloud hosting</Link>
             </div>
           </div>
-          <CloudIllustration />
+          <div className="enter" style={{ ["--i" as string]: 3 }}>
+            <ServiceMap />
+          </div>
         </div>
       </section>
 
-      <section className="section" aria-labelledby="services-title">
+      <section className="section" aria-labelledby="goal-title">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow">Start with your goal</p>
+            <h2 id="goal-title">What do you need to get done?</h2>
+            <p className="lede">Pick a goal and we will point you to the services that cover it.</p>
+          </div>
+          <SolutionSelector />
+        </div>
+      </section>
+
+      <section className="section section--navy" aria-labelledby="services-title">
         <div className="wrap">
           <div className="section-head">
             <p className="eyebrow">What we do</p>
@@ -59,7 +73,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section section--navy" aria-labelledby="cloud-title">
+      <section className="section" aria-labelledby="cloud-title">
         <div className="wrap">
           <div className="section-head">
             <p className="eyebrow">Cloud hosting</p>
@@ -69,32 +83,30 @@ export default function Home() {
               draws on shared resources.
             </p>
           </div>
-          <div className="cols-3">
-            <div className="col-block">
-              <h3>Public Cloud</h3>
-              <p>Every business is unique, and so must be its cloud solution. An intelligent cloud computing architecture designed around your business.</p>
-            </div>
-            <div className="col-block">
-              <h3>Private Cloud</h3>
-              <p>Scalable, secure, high-compute and flexible, combining the security and performance of a private cloud with the cost-effectiveness of a public one.</p>
-            </div>
-            <div className="col-block">
-              <h3>SAP HANA</h3>
-              <p>Move to SAP S/4 HANA in the cloud, and build, deploy, host, manage and monitor your HANA environment with expert help.</p>
-            </div>
+          <div className="grid-3">
+            {[
+              ["Public Cloud", "Every business is unique, and so must be its cloud solution. An intelligent cloud computing architecture designed around your business."],
+              ["Private Cloud", "Scalable, secure, high-compute and flexible, combining the security and performance of a private cloud with the cost-effectiveness of a public one."],
+              ["SAP HANA", "Move to SAP S/4 HANA in the cloud, and build, deploy, host, manage and monitor your HANA environment with expert help."],
+            ].map(([t, p]) => (
+              <div className="tile panel" key={t}>
+                <h3>{t}</h3>
+                <p style={{ color: "var(--muted)", margin: 0 }}>{p}</p>
+              </div>
+            ))}
           </div>
           <p style={{ marginTop: 36 }}>
-            <Link href="/cloud" className="btn btn--light">See cloud options</Link>
+            <Link href="/cloud" className="btn btn--ghost">See cloud options</Link>
           </p>
         </div>
       </section>
 
-      <section className="section" aria-labelledby="why-title">
+      <section className="section section--mist" aria-labelledby="why-title">
         <div className="wrap split split--wide-left">
           <div>
             <p className="eyebrow">Why AdINET</p>
             <h2 id="why-title">Why businesses choose us</h2>
-            <ul className="reasons" style={{ marginTop: 32 }}>
+            <ul className="reasons" style={{ marginTop: 36 }}>
               {reasons.map((r) => (
                 <li key={r.t}>
                   <h3>{r.t}</h3>

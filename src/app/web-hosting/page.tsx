@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
+import Accordion from "@/components/Accordion";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
@@ -46,6 +47,23 @@ export default function WebHosting() {
               <Link href="/contact">contact page</Link>.
             </p>
           </aside>
+        </div>
+      </section>
+      <section className="section section--mist" aria-labelledby="faq-title">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow">Questions</p>
+            <h2 id="faq-title">Before you book</h2>
+          </div>
+          <Accordion
+            items={[
+              { q: "How long is the contract?", a: <p>The minimum contract and payment term is one year, with 100% advance payment with the service order.</p> },
+              { q: "Can I change plans?", a: <p>Plans can be upgraded at any point by paying the difference amount. Plans cannot be downgraded during the contract period.</p> },
+              { q: "How quickly is my hosting set up?", a: <p>Configuration is completed within 24 to 48 hours from the date of advance payment.</p> },
+              { q: "What if it is not right for me?", a: <p>We offer a 30-day money-back guarantee, with no questions asked on cancellation.</p> },
+              { q: "Which features are Windows-plan only?", a: <p>Perl, PHP and .NET with the 3.5 Framework, and MySQL and MS SQL 2008 support (with 500 MB space per MS SQL database), are available on the Windows plan only.</p> },
+            ]}
+          />
         </div>
       </section>
       <CtaBand title="Book your hosting space" text="Tell us your requirements and whether you need a Linux or Windows plan." />

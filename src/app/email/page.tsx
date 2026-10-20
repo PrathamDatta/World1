@@ -58,6 +58,24 @@ export default function Email() {
             </article>
           ))}
         </div>
+        <div className="wrap" style={{ marginTop: 56 }}>
+          <h2 style={{ fontSize: "1.5rem" }}>Compare at a glance</h2>
+          <div className="compare">
+            <table>
+              <thead>
+                <tr><th scope="col"><span className="sr-only">Feature</span></th>{products.map((p) => <th scope="col" key={p.name}>{p.name}</th>)}</tr>
+              </thead>
+              <tbody>
+                {["Deployment", "Storage", "Price"].map((row) => (
+                  <tr key={row}>
+                    <th scope="row">{row}</th>
+                    {products.map((p) => <td key={p.name}>{p.specs.find(([k]) => k === row)?.[1] ?? "Ask our team"}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div className="wrap" style={{ marginTop: 40 }}>
           <h2 style={{ fontSize: "1.2rem" }}>Terms & conditions</h2>
           <ul className="checklist">

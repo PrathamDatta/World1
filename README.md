@@ -5,15 +5,18 @@ Next.js 16 (App Router) + TypeScript. Content is based on the existing adinet we
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm run lint && npm run typecheck && npm run build   # static site in ./out
+npm run lint && npm run typecheck && npm run build && npm start
 ```
 
-## Hosting on GitHub Pages
-The site is a static export (`output: "export"`). `.github/workflows/pages.yml` builds and deploys it on every push to `main`.
-1. Merge to `main`, then in the repo go to Settings → Pages → Source: **GitHub Actions**.
-2. Project site (`https://<user>.github.io/<repo>/`): nothing else to do; the workflow sets `NEXT_PUBLIC_BASE_PATH=/<repo>`.
-3. Custom domain: add it under Settings → Pages and remove the `NEXT_PUBLIC_BASE_PATH` line in the workflow.
-Because Pages is static, the forms still use `mailto:` (see below).
+## Deploying on Vercel
+1. In Vercel, choose Add New → Project and import this GitHub repository (framework preset: Next.js, no extra settings).
+2. Set the production branch to `main`; every push then deploys automatically and PRs get preview URLs.
+3. Optional: add `NEXT_PUBLIC_SITE_URL` (your final domain) under Settings → Environment Variables, then add the domain under Settings → Domains.
+
+## Interactions & motion
+No animation library: transitions are CSS (opacity/transform only), scroll reveals use one IntersectionObserver (`PageEffects`), and everything respects `prefers-reduced-motion`.
+- Header: hover/click/keyboard/touch dropdowns (arrow keys, Escape, outside click, focus-out), animated mobile menu, sticky header that compacts on scroll.
+- Home: interactive service map, goal-based solution selector (tabs). Cloud: tabs and a single-server vs virtual-partition diagram. FAQ accordions on Domains, Web Hosting and IT Support. Email comparison table. Back-to-top, card spotlight hover.
 
 ## Configuration
 - `NEXT_PUBLIC_SITE_URL` (e.g. `https://www.example.in`): enables absolute metadata, `sitemap.xml` and the robots sitemap line. Not set by default because the production domain is not confirmed.

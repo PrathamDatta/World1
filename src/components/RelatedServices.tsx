@@ -12,7 +12,7 @@ export default function RelatedServices({ page }: { page: PageKey }) {
         <ul className="related__list">
           {keys.map((k) => (
             <li key={k}>
-              <Link href={pages[k].path} className="related__link" data-cursor="Open">
+              <Link href={pages[k].path} className="related__link">
                 <strong>{pages[k].name}</strong>
                 <span>{pages[k].blurb}</span>
                 <i aria-hidden="true">→</i>

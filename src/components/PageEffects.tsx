@@ -127,7 +127,7 @@ export default function PageEffects() {
       data-show={showTop}
       aria-label="Back to top"
       tabIndex={showTop ? 0 : -1}
-      data-cursor="Top"
+     
       onClick={() => window.scrollTo({ top: 0, behavior: reduced() ? "auto" : "smooth" })}
     >
       <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 10l5-5 5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>

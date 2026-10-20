@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { asset } from "@/data/assets";
 import { company, isGroup, nav } from "@/data/site";
 
 function Chevron() {
@@ -48,7 +49,7 @@ export default function Header() {
     <header className="site-header">
       <div className="wrap site-header__bar" ref={barRef}>
         <Link href="/" className="brand" onClick={go} aria-label={`${company.name} home`}>
-          <Image src="/brand/adinet-logo.png" alt="" width={74} height={61} priority />
+          <Image src={asset("/brand/adinet-logo.png")} alt="" width={74} height={61} priority />
           <span>
             {company.shortName}
             <small>{company.location}</small>

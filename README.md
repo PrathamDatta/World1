@@ -5,8 +5,15 @@ Next.js 16 (App Router) + TypeScript. Content is based on the existing adinet we
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm run lint && npm run typecheck && npm run build && npm start
+npm run lint && npm run typecheck && npm run build   # static site in ./out
 ```
+
+## Hosting on GitHub Pages
+The site is a static export (`output: "export"`). `.github/workflows/pages.yml` builds and deploys it on every push to `main`.
+1. Merge to `main`, then in the repo go to Settings → Pages → Source: **GitHub Actions**.
+2. Project site (`https://<user>.github.io/<repo>/`): nothing else to do; the workflow sets `NEXT_PUBLIC_BASE_PATH=/<repo>`.
+3. Custom domain: add it under Settings → Pages and remove the `NEXT_PUBLIC_BASE_PATH` line in the workflow.
+Because Pages is static, the forms still use `mailto:` (see below).
 
 ## Configuration
 - `NEXT_PUBLIC_SITE_URL` (e.g. `https://www.example.in`): enables absolute metadata, `sitemap.xml` and the robots sitemap line. Not set by default because the production domain is not confirmed.

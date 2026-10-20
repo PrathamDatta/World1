@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { company } from "@/data/site";
 
@@ -17,7 +18,8 @@ const interests = [
 
 type Errors = Partial<Record<"name" | "email" | "phone" | "message", string>>;
 
-export default function ContactForm({ defaultDomain = "" }: { defaultDomain?: string }) {
+export default function ContactForm() {
+  const defaultDomain = (useSearchParams().get("domain") ?? "").slice(0, 253);
   const [errors, setErrors] = useState<Errors>({});
   const [mailto, setMailto] = useState("");
 

@@ -115,7 +115,7 @@ export default function Home() {
       <section className="section section--paper" aria-labelledby="why-title">
         <div className="wrap">
           <div className="section-head">
-            <p className="eyebrow">Why AdINET</p>
+            <p className="eyebrow">Why ADINET</p>
             <Split as="h2" id="why-title" text="Why businesses *choose* us" className="display" />
           </div>
           <div className="why">
@@ -129,8 +129,8 @@ export default function Home() {
             </ul>
             <figure className="quote">
               <blockquote>
-                “AdINET provides us cost effective and reliable intranet services, also providing the domain related
-                services. We have been obtaining services from AdINET for more than 10 years and we found that the
+                “ADINET provides us cost effective and reliable intranet services, also providing the domain related
+                services. We have been obtaining services from ADINET for more than 10 years and we found that the
                 company is very much reliable and honest in their service.”
               </blockquote>
               <figcaption>

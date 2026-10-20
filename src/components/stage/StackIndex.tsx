@@ -8,14 +8,13 @@ import { setStage } from "@/lib/stage";
 export default function StackIndex() {
   const top = [...layers].reverse();
   return (
-    <nav className="stack-index" aria-label="Services">
+    <nav className="stack-index" aria-label="Services" data-cursor-off>
       <p className="stack-index__cap">The stack, top to bottom</p>
       <ol>
         {top.map((l) => (
           <li key={l.id}>
             <Link
               href={l.links[0].href}
-              data-cursor="Open"
               onPointerEnter={(e) => e.pointerType === "mouse" && setStage({ hover: l.index })}
               onPointerLeave={() => setStage({ hover: -1 })}
               onFocus={() => setStage({ hover: l.index })}

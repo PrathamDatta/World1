@@ -18,7 +18,7 @@ export default function Image() {
             Cloud hosting, business email, domains, IT support and custom web applications.
           </div>
         </div>
-        <svg width="460" height="520" viewBox="0 0 240 250" style={{ position: "absolute", right: 30, top: 60 }}>
+        <svg width="460" height="540" viewBox="0 20 240 282" style={{ position: "absolute", right: 30, top: 45 }}>
           {plates.map((i) => {
             const y = 196 - i * 26;
             return (

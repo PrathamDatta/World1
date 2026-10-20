@@ -205,12 +205,12 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .si-a { opacity: 0; transform: translateX(-8px); transition: opacity .25s, transform .35s var(--ease); }
 .stack-index a:hover .si-a, .stack-index a:focus-visible .si-a { opacity: 1; transform: none; }
 
-.marquee { position: relative; z-index: 1; overflow: hidden; background: var(--sky); color: var(--ink); border-block: 1px solid var(--navy-950); }
+.marquee { position: relative; z-index: 1; overflow: hidden; background: #ffffff; color: var(--ink); border-block: 1px solid var(--line); }
 .marquee__track { display: flex; width: max-content; animation: marq 46s linear infinite; }
 .marquee__row { display: flex; align-items: center; flex: none; }
 .marquee__row li { display: flex; align-items: center; }
 .marquee__row span { font: 800 clamp(1.4rem, 2.6vw, 2.2rem)/1 var(--font-head); letter-spacing: -.035em; text-transform: uppercase; padding: 18px 0; }
-.marquee__row i { font-style: normal; margin: 0 clamp(18px, 3vw, 40px); font-size: 1rem; }
+.marquee__row i { color: var(--blue); font-style: normal; margin: 0 clamp(18px, 3vw, 40px); font-size: 1rem; }
 @keyframes marq { to { transform: translateX(-50%); } }
 .marquee--outline { background: transparent; border-color: var(--line); }
 .marquee--outline span { color: transparent; -webkit-text-stroke: 1.5px var(--ink); font-size: clamp(3rem, 8vw, 7rem); padding: 14px 0; }
@@ -426,7 +426,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .cursor__ring { position: absolute; left: 0; top: 0; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; border: 1.5px solid #fff; mix-blend-mode: difference; display: grid; place-items: center; transition: transform .35s var(--ease), background .3s, opacity .3s; }
 .cursor[data-state="link"] .cursor__ring { transform: scale(1.5); background: rgba(255, 255, 255, .16); }
 .cursor[data-label="true"] .cursor__ring { transform: scale(2.1); }
-.cursor[data-state="text"] .cursor__ring { opacity: 0; }
+.cursor[data-state="text"] .cursor__ring, .cursor[data-state="off"] .cursor__ring { opacity: 0; }
 .cursor[data-press="true"] .cursor__ring { transform: scale(.8); }
 .cursor__label { font: 600 .42rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: #fff; }
 @media (pointer: coarse) { .cursor { display: none; } }

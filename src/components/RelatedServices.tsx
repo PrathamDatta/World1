@@ -8,7 +8,7 @@ export default function RelatedServices({ page }: { page: PageKey }) {
     <section className="section section--mist related" aria-labelledby="related-title">
       <div className="wrap">
         <p className="eyebrow">Related</p>
-        <h2 id="related-title">Related AdINET services</h2>
+        <h2 id="related-title">Related ADINET services</h2>
         <ul className="related__list">
           {keys.map((k) => (
             <li key={k}>

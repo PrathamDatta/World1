@@ -1,4 +1,4 @@
-/** Project team structure as described on the existing AdINET site: the client sits at the centre. */
+/** Project team structure as described on the existing ADINET site: the client sits at the centre. */
 const roles = [
   { x: 20, y: 123, label: "Director" },
   { x: 340, y: 123, label: "Creative team" },

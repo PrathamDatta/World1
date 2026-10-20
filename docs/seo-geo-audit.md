@@ -1,6 +1,6 @@
-# SEO and GEO audit: AdINET Infosystems website
+# SEO and GEO audit: ADINET INFOSYSTEMS website
 
-Internal report. All facts on the site come from the existing AdINET website and the screenshots supplied by the company. Nothing here claims ranking, indexing or AI-answer inclusion has improved; those need real-world evidence (Search Console, query tests) that only exists after launch.
+Internal report. All facts on the site come from the existing ADINET website and the screenshots supplied by the company. Nothing here claims ranking, indexing or AI-answer inclusion has improved; those need real-world evidence (Search Console, query tests) that only exists after launch.
 
 ## 1. What was implemented
 
@@ -18,7 +18,7 @@ Internal report. All facts on the site come from the existing AdINET website and
 **On-page and content**
 - Every service page opens with an "at a glance" block: a plain-language definition and a fact list (`AtAGlance`), before the interactive content.
 - FAQ sections on eight service pages, driven by `src/data/faqs.ts`. The same data is rendered in the page and emitted as FAQPage JSON-LD, so they always match. Answers remain in the HTML while collapsed.
-- "Related AdINET services" links on nine pages for descriptive internal linking.
+- "Related ADINET services" links on nine pages for descriptive internal linking.
 - Footer states what the company is on every page.
 - H1 on the security page changed from the vague "Security & Addons" to "SSL, Security & Backup Addons".
 
@@ -30,7 +30,7 @@ Internal report. All facts on the site come from the existing AdINET website and
 
 | Fact | Value | Used in |
 |---|---|---|
-| Name | AdINET Infosystems (short: AdINET) | titles, headings, footer, Organization JSON-LD, `llms.txt`, OG image |
+| Name | ADINET INFOSYSTEMS (short: ADINET) | titles, headings, footer, Organization JSON-LD, `llms.txt`, OG image |
 | Location | Bengaluru, India | home title, footer, Organization address (locality + country only), `llms.txt` |
 | Email / phone | sales@adinet.in, +91 9986003120 (also WhatsApp) | contact page, footer, Organization contactPoint, `llms.txt` |
 | What it does | cloud and web hosting, business email, domains, IT support, website design, custom web applications, security add-ons | home description, about, footer, Organization `knowsAbout` |

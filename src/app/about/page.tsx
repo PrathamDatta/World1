@@ -13,7 +13,7 @@ export default function About() {
   return (
     <>
       <PageHero
-        title="About AdINET Infosystems"
+        title="About ADINET INFOSYSTEMS"
         intro="A young and dynamic Bengaluru organisation offering total and cost-effective IT solutions."
       />
       <PageSchema page="about" />
@@ -24,12 +24,12 @@ export default function About() {
             <p className="eyebrow">Who we are</p>
             <h2>Total and cost-effective web solutions</h2>
             <p>
-              AdINET, Bengaluru, provides total and cost-effective web solutions. One of our greatest strengths lies in
+              ADINET, Bengaluru, provides total and cost-effective web solutions. One of our greatest strengths lies in
               the quality policy followed by us, as well as the professional approach we take towards executing every
               project through to the very end.
             </p>
             <p>
-              The AdINET team comprises the best-of-breed professionals, who have excelled with in-depth knowledge in
+              The ADINET team comprises the best-of-breed professionals, who have excelled with in-depth knowledge in
               their respective areas. Our in-house design team can carry a project from initial requirement analysis,
               application study and prototype through to home page design, hosting, e-business planning, design and
               implementation.

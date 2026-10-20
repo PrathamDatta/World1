@@ -25,6 +25,10 @@ export function siteGraph() {
         contactPoint: [
           { "@type": "ContactPoint", contactType: "sales", email: company.email, telephone: company.phone },
         ],
+        areaServed: [
+          ...["India", "United States", "Singapore", "United Arab Emirates"].map((name) => ({ "@type": "Country", name })),
+          { "@type": "Place", name: "Gulf region" },
+        ],
         knowsAbout: servicePages.map((k) => pages[k].service!.serviceType),
       },
       {

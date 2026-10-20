@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import PageSchema from "@/components/PageSchema";
+import RelatedServices from "@/components/RelatedServices";
+import AtAGlance from "@/components/AtAGlance";
+import FaqSection from "@/components/FaqSection";
 import CtaBand from "@/components/CtaBand";
 import OrgDiagram from "@/components/OrgDiagram";
 import PageHero from "@/components/PageHero";
 
-export const metadata: Metadata = {
-  title: "Custom Web Application Development",
-  description: "Custom web application and portal development by AdINET's in-house team, from requirement analysis and prototype through to hosting and implementation.",
-};
+export const metadata: Metadata = pageMetadata("customWebApps");
 
 const core = ["MVC framework / Core", "Web / database integration", "HTML5, JavaScript, jQuery and AngularJS", "MS SQL and MySQL", "Turnkey portal development"];
 const solution = ["Visualization", "Web-based application development", "Client-server application development", "Network application development on TCP/IP", "E-business solutions", "Portal maintenance"];
@@ -19,6 +21,8 @@ export default function CustomWebApps() {
         title="Custom Web Application Development"
         intro="AdINET’s in-house team can execute a project from initial requirement analysis, application study and prototype through to home page design, hosting, e-business planning, design and implementation."
       />
+      <PageSchema page="customWebApps" />
+      <AtAGlance page="customWebApps" />
       <section className="section section--navy" aria-labelledby="stages-title">
         <div className="wrap">
           <div className="section-head">
@@ -61,6 +65,8 @@ export default function CustomWebApps() {
           </p>
         </div>
       </section>
+      <FaqSection page="customWebApps" tone="paper" />
+      <RelatedServices page="customWebApps" />
       <CtaBand title="Tell us about your application" text="Share your requirements and we will discuss scope, approach and next steps." />
     </>
   );

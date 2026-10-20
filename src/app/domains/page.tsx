@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import PageSchema from "@/components/PageSchema";
+import AtAGlance from "@/components/AtAGlance";
+import RelatedServices from "@/components/RelatedServices";
+import FaqSection from "@/components/FaqSection";
 import CtaBand from "@/components/CtaBand";
 import DomainSearch from "@/components/DomainSearch";
-import Accordion from "@/components/Accordion";
 import Marquee from "@/components/Marquee";
 import PageHero from "@/components/PageHero";
 
-export const metadata: Metadata = {
-  title: "Managed Domain Name Registration",
-  description: "Fully managed domain name registration with advance telephone and email renewal reminders, optional DNS, privacy and domain theft protection.",
-};
+export const metadata: Metadata = pageMetadata("domains");
 
 const features = [
   "Premium services at affordable rates",
@@ -29,6 +30,8 @@ export default function Domains() {
         title="Domain Name Registration"
         intro="Select your internet domain name and we will take care of the rest, with a fully managed service by our expert team."
       />
+      <PageSchema page="domains" />
+      <AtAGlance page="domains" />
       <section className="section">
         <div className="wrap">
           <div className="domain-box">
@@ -83,23 +86,8 @@ export default function Domains() {
           </div>
         </div>
       </section>
-      <section className="section" aria-labelledby="faq-title">
-        <div className="wrap">
-          <div className="section-head">
-            <p className="eyebrow">Questions</p>
-            <h2 id="faq-title">Managed domains, answered</h2>
-          </div>
-          <Accordion
-            items={[
-              { q: "What is the managed domain service?", a: <p>An AdINET initiative that helps customers renew domains on time and avoid the redemption/restoration cycle. It is a fully managed service handled by our dedicated staff.</p> },
-              { q: "When will I be reminded?", a: <p>Telephone and email reminders start 60 days before renewal, including calls at 30 days and 15 days before expiry.</p> },
-              { q: "What does it cost?", a: <p>₹300 per domain name registration, in addition to the domain registration fee. Prices and features are subject to change without prior notice.</p> },
-              { q: "Which extensions can I register?", a: <p>.com, .net, .org, .info, .biz, .co.uk, .co.in, .in, .name, .uk, .tv and .mobi.</p> },
-              { q: "Can I check if a name is free right now?", a: <p>Not on this website yet. Enter the name above and send it to our team, and we will confirm availability and registration details.</p> },
-            ]}
-          />
-        </div>
-      </section>
+      <FaqSection page="domains" tone="paper" />
+      <RelatedServices page="domains" />
       <CtaBand title="Register or transfer a domain" text="Tell us the name you want and we will confirm availability and next steps." />
     </>
   );

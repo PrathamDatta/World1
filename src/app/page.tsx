@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import PageSchema from "@/components/PageSchema";
+import { pageMetadata } from "@/lib/seo";
 import CtaBand from "@/components/CtaBand";
 import HostingCompare from "@/components/HostingCompare";
 import Marquee from "@/components/Marquee";
@@ -17,9 +20,12 @@ const reasons = [
   { t: "Fully managed domains", p: "Our managed domain service sends telephone and email reminders so a domain never lapses into redemption." },
 ];
 
+export const metadata: Metadata = pageMetadata("home");
+
 export default function Home() {
   return (
     <>
+      <PageSchema page="home" />
       <Stage>
         <FocusZone index={-1} className="hero" labelledBy="hero-title">
           <div className="wrap hero__grid">

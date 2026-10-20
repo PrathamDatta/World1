@@ -20,8 +20,13 @@ npm run lint && npm run typecheck && npm run build && npm start
 - Type: Geist (display/body), Geist Mono (labels), Instrument Serif italic (accents), self-hosted via `next/font/local` in `src/fonts`.
 - Interaction: cursor ring (desktop mouse only, native cursor stays), magnetic buttons, card spotlight, accessible tabs/accordions, hover/click/keyboard/touch dropdowns.
 
+## SEO and GEO
+Page metadata, canonical URLs, JSON-LD, the sitemap, `/llms.txt` and the visible summaries/FAQs all read from `src/data/pages.ts` and `src/data/faqs.ts`. See `docs/seo-geo-audit.md` for what was done and what information is still missing.
+- Production origin: set `NEXT_PUBLIC_SITE_URL` (e.g. `https://www.example.in`) once a custom domain is live. On Vercel the production URL is picked up automatically via `VERCEL_PROJECT_PRODUCTION_URL`. With neither, canonical URLs and the sitemap are omitted.
+- Vercel preview deployments are automatically `noindex` with a disallow-all `robots.txt`.
+
 ## Configuration
-- `NEXT_PUBLIC_SITE_URL` (e.g. `https://www.example.in`): enables absolute metadata, `sitemap.xml` and the robots sitemap line. Not set by default because the production domain is not confirmed.
+- `NEXT_PUBLIC_SITE_URL`: see SEO and GEO above.
 
 ## Open items (need client input)
 - Contact and domain forms prepare a `mailto:` to sales@adinet.in; no server-side submission exists. To receive enquiries directly, add an API route / form service (e.g. SMTP or a transactional email API) with credentials in server-side env vars.

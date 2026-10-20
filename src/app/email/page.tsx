@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import PageSchema from "@/components/PageSchema";
+import AtAGlance from "@/components/AtAGlance";
+import RelatedServices from "@/components/RelatedServices";
+import FaqSection from "@/components/FaqSection";
 import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
 import PartnerLogo from "@/components/PartnerLogo";
 import type { PartnerKey } from "@/data/partners";
 
-export const metadata: Metadata = {
-  title: "Business Cloud Email Hosting",
-  description: "Professional business email with IceWarp, OX and MDaemon, from AdINET Infosystems. Public cloud, private cloud and software options.",
-};
+export const metadata: Metadata = pageMetadata("email");
 
 const products = [
   {
@@ -41,6 +43,8 @@ export default function Email() {
         title="Business Cloud Email Hosting"
         intro="Build customer trust with professional email addresses. Create as many group mailing lists as your company needs, like sales@yourcompany.com."
       />
+      <PageSchema page="email" />
+      <AtAGlance page="email" />
       <section className="section">
         <div className="wrap grid-3">
           {products.map((p) => (
@@ -85,6 +89,8 @@ export default function Email() {
           </ul>
         </div>
       </section>
+      <FaqSection page="email" tone="paper" />
+      <RelatedServices page="email" />
       <CtaBand title="Move to professional email" text="Tell us how many mailboxes you need and we will recommend the right platform." />
     </>
   );

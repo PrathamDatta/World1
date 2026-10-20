@@ -183,7 +183,7 @@ export default function Header() {
   return (
     <header className={`site-header${scrolled ? " is-scrolled" : ""}${menuOpen ? " is-menu-open" : ""}`}>
       <div className="wrap site-header__bar" ref={barRef}>
-        <Link href="/" className="brand" onClick={closeAll} aria-label={`${company.name} home`}>
+        <Link href="/" className="brand" onClick={closeAll}>
           <Image src={asset("/brand/adinet-logo.png")} alt="" width={74} height={61} priority />
           <span>
             {company.shortName}

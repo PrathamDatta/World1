@@ -467,7 +467,7 @@ main:has(.world) { background: transparent; }
 
 /* services as a connected infographic */
 .svc { display: grid; gap: 28px; align-items: start; grid-template-columns: 1fr; }
-@media (min-width: 960px) { .svc { grid-template-columns: 230px minmax(0, 1fr); grid-template-areas: "rail stage" "rail panel"; gap: 24px 40px; } .svc__rail { grid-area: rail; } .svc__stage { grid-area: stage; } .svc__panel { grid-area: panel; } }
+@media (min-width: 960px) { .svc { grid-template-columns: 230px minmax(0, 1fr); grid-template-areas: "rail stage" "rail panel"; gap: 24px 40px; } }
 .svc__rail ol { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
 .svc__rail ol::-webkit-scrollbar { display: none; }
 @media (min-width: 960px) { .svc__rail ol { flex-direction: column; gap: 0; overflow: visible; position: relative; padding: 4px 0; } .svc__rail ol::before { content: ""; position: absolute; left: 21px; top: 24px; bottom: 24px; width: 1.5px; background: linear-gradient(180deg, rgba(10,35,71,.1), rgba(20,105,223,.5), rgba(10,35,71,.1)); } }
@@ -563,3 +563,28 @@ main:has(.world) { background: transparent; }
 @media (min-width: 900px) { .contact-calm { grid-template-columns: 1.2fr .8fr; gap: 80px; } }
 .contact-calm__details { background: rgba(255,255,255,.93); border-radius: 28px; padding: 14px 28px; box-shadow: 0 40px 80px -50px rgba(11, 61, 145, .55); margin: 0; }
 .zone--contact .btn-row { margin-top: 28px; }
+
+
+/* ===== seven real cloud layers ===== */
+.cls { display: grid; gap: 36px; align-items: center; }
+@media (min-width: 960px) { .cls { grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: 56px; } }
+.cls__side { display: grid; gap: 20px; }
+.cl { --row: 76px; --sep: 1; position: relative; height: calc(8 * var(--row)); border-radius: 32px; overflow: hidden; background: linear-gradient(180deg, #2f7fe0 0%, #5fa9f0 45%, #a8d4fb 100%); box-shadow: 0 40px 80px -50px rgba(11, 61, 145, .7); }
+@media (min-width: 700px) { .cl { --row: 92px; } }
+.cl__canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 1s var(--ease); }
+.cl[data-gl="live"] .cl__canvas { opacity: 1; }
+.cl__list { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+.cl__list li { position: absolute; left: 0; right: 0; height: var(--row); z-index: var(--i); top: calc(50% - var(--row) / 2 - (var(--i) - 3) * var(--row) * (1 - .55 * (1 - var(--sep)))); }
+.cl__list button { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; height: 100%; padding: 0 clamp(22px, 6vw, 64px); border: 0; border-radius: 999px; background: transparent; color: var(--ink-sky); cursor: pointer; text-align: left; transition: transform .5s var(--ease), color .3s; }
+.cl__list button { padding-top: 0; }
+.cl[data-anim="on"] .cl__list button { opacity: clamp(0, calc((var(--sep) - .25 - var(--i) * .07) * 6), 1); }
+.cl__n { font: 500 .74rem var(--font-mono); letter-spacing: .1em; color: var(--blue-deep); }
+.cl__l { font: 800 clamp(1.15rem, 2.4vw, 1.6rem) var(--font-head); letter-spacing: -.035em; text-shadow: 0 0 14px rgba(255, 255, 255, .85); }
+.cl__t { margin-left: auto; font: 500 .68rem var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: #234c80; opacity: .85; }
+.cl__list button:hover { transform: translateY(-3px); }
+.cl__list button[aria-pressed="true"] { transform: translateY(-6px); color: var(--blue-deep); }
+.cl__list button[aria-pressed="true"] .cl__l::after { content: " →"; color: var(--blue); }
+.cl__list button:focus-visible { outline: 2px solid var(--blue); outline-offset: -4px; }
+/* CSS-only cloud decks until (or unless) the WebGL clouds are running */
+.cl:not([data-gl="live"]) .cl__list button { background: radial-gradient(60% 120% at 25% 45%, #fff 0%, rgba(255,255,255,.7) 55%, rgba(255,255,255,.15) 100%); box-shadow: 0 20px 30px -24px rgba(40, 90, 160, .5); }
+.cl:not([data-gl="live"]) .cl__list button[aria-pressed="true"] { background: radial-gradient(60% 120% at 25% 45%, #fff 0%, #fff 60%, rgba(255,255,255,.4) 100%); }

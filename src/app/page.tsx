@@ -6,7 +6,7 @@ import HostingCompare from "@/components/HostingCompare";
 import SolutionSelector from "@/components/SolutionSelector";
 import Split from "@/components/Split";
 import SkyCanvas from "@/components/sky/SkyCanvas";
-import ServiceWorld from "@/components/ServiceWorld";
+import CloudLayers from "@/components/CloudLayers";
 import CloudExplainer from "@/components/CloudExplainer";
 import { company } from "@/data/site";
 
@@ -50,14 +50,14 @@ export default function Home() {
           <div className="wrap">
             <div className="zone__head">
               <p className="eyebrow">Our services</p>
-              <Split as="h2" id="services-title" text="SEVEN SERVICES.|ONE CONNECTED CLOUD." className="display" step={80} />
+              <Split as="h2" id="services-title" text="SEVEN LAYERS.|ONE CONNECTED CLOUD." className="display" step={80} />
               <p className="lede">
-                Everything we offer builds on the layer beneath it, from cloud infrastructure at the foundation to the
-                support that looks after it all. Select a service to explore it. The illustrations are conceptual, not
+                Each service is a layer of cloud, and each builds on the one beneath it, from cloud infrastructure at the
+                foundation to the support that looks after it all. Select a layer to explore it. The illustrations are conceptual, not
                 diagrams of our infrastructure.
               </p>
             </div>
-            <ServiceWorld />
+            <CloudLayers />
           </div>
         </section>
 

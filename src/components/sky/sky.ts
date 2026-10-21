@@ -1,23 +1,11 @@
 import {
-  AdditiveBlending,
-  BufferGeometry,
   Color,
   DataTexture,
-  Float32BufferAttribute,
-  Group,
-  InstancedMesh,
-  LineBasicMaterial,
-  LineSegments,
   LinearFilter,
   MathUtils,
   Mesh,
-  MeshBasicMaterial,
-  Object3D,
-  OctahedronGeometry,
   PerspectiveCamera,
   PlaneGeometry,
-  Points,
-  PointsMaterial,
   RGBAFormat,
   RepeatWrapping,
   Scene,
@@ -42,9 +30,9 @@ const smooth = (x: number) => {
 };
 
 /** One small tileable fractal-noise texture shared by every cloud layer (generated once, no network request). */
-function makeNoise(size = 256) {
+function makeNoise(size = 512) {
   const rand = rng(5);
-  const octaves = [{ f: 4, a: 1 }, { f: 8, a: 0.55 }, { f: 16, a: 0.3 }, { f: 32, a: 0.16 }];
+  const octaves = [{ f: 4, a: 1 }, { f: 8, a: 0.6 }, { f: 16, a: 0.38 }, { f: 32, a: 0.24 }, { f: 64, a: 0.14 }];
   const grids = octaves.map((o) => Float32Array.from({ length: o.f * o.f }, () => rand()));
   const data = new Uint8Array(size * size * 4);
   const sum = octaves.reduce((s, o) => s + o.a, 0);
@@ -86,109 +74,45 @@ uniform sampler2D uNoise;
 uniform float uTime, uSpeed, uScale, uCover, uOpacity, uAspect, uCalm, uNear;
 uniform vec2 uSeed; uniform vec3 uTint, uShade, uHaze;
 varying vec2 vUv; varying float vDist;
-float field(vec2 q){
-  float a = texture2D(uNoise, q).r;
-  float b = texture2D(uNoise, q * 2.1 + 0.31).r;
-  float c = texture2D(uNoise, q * 4.3 + 0.77).r;
-  return a * 0.62 + b * 0.28 + c * 0.10;
-}
+float tex(vec2 q){ return texture2D(uNoise, q).r; }
+float body(vec2 q){ return tex(q) * 0.72 + tex(q * 2.1 + 0.31) * 0.28; }
 void main(){
   vec2 m = (vUv - 0.5) * 2.0;
-  float mask = 1.0 - smoothstep(0.2, 1.0, length(m * vec2(1.0, 1.5)));
+  float mask = 1.0 - smoothstep(0.25, 1.0, length(m * vec2(1.0, 1.55)));
+  // cumulus: broad billows with a flatter base
+  mask *= mix(0.55, 1.0, smoothstep(0.06, 0.4, vUv.y));
   if (mask <= 0.002) discard;
-  vec2 q = (vUv - 0.5) * vec2(uAspect, 1.0) * uScale + uSeed + vec2(uTime * uSpeed, uTime * uSpeed * 0.12);
-  float cover = uCover + uCalm * 0.12;
-  float d = smoothstep(cover, cover + 0.34, field(q) * mask * 1.6);
+  vec2 q = (vUv - 0.5) * vec2(uAspect, 1.0) * uScale + uSeed + vec2(uTime * uSpeed, uTime * uSpeed * 0.1);
+  float cover = uCover + uCalm * 0.1;
+  float shape = body(q) * mask * 1.7;
+  // fine billows erode the edge so outlines are crisp and cauliflower-like, not blurry blobs
+  float detail = tex(q * 5.3 + 0.5) * 0.6 + tex(q * 11.0 + 0.2) * 0.4;
+  float s = shape + (detail - 0.5) * 0.34;
+  float d = smoothstep(cover, cover + 0.15, s);
   if (d <= 0.003) discard;
-  float d2 = smoothstep(cover, cover + 0.34, field(q + vec2(0.016, 0.026)) * mask * 1.6);
-  float lit = clamp(0.7 + (d - d2) * 3.6, 0.0, 1.0);
-  float belly = smoothstep(0.05, 0.85, vUv.y);
-  float k = clamp(lit * 0.6 + belly * 0.5, 0.0, 1.0);
+  // march toward the sun (up and to the right): the more cloud in the way, the darker the pixel
+  vec2 sun = vec2(0.5, 0.86);
+  float occ = 0.0;
+  for (int i = 1; i <= 3; i++) {
+    vec2 o = sun * (0.012 * float(i));
+    float si = body(q + o) * mask * 1.7 + (tex((q + o) * 5.3 + 0.5) - 0.5) * 0.34;
+    occ += smoothstep(cover, cover + 0.15, si);
+  }
+  occ /= 3.0;
+  float lit = clamp(1.55 - occ * 0.8 + (detail - 0.5) * 0.7, 0.0, 1.0);
+  float belly = smoothstep(0.0, 0.7, vUv.y);
+  float k = clamp(lit * 0.78 + belly * 0.3, 0.0, 1.0);
   vec3 col = mix(uShade, uTint, k);
-  col = mix(col, uHaze, smoothstep(10.0, 80.0, vDist) * 0.62);
+  float rim = (1.0 - smoothstep(0.0, 0.5, d)) * lit;
+  col += vec3(0.1, 0.09, 0.05) * rim; // faint warm silver lining on sunlit edges
+  col = mix(col, uHaze, smoothstep(10.0, 80.0, vDist) * 0.6);
   float a = d * uOpacity * smoothstep(uNear, uNear + 8.0, vDist) * (1.0 - uCalm * 0.35);
   gl_FragColor = vec4(col, a);
 }`;
 
-type Net = { group: Group; update: (t: number, dt: number, animated: boolean) => void; dispose: () => void };
-
-/** A small connected node lattice: the "technology inside the clouds". Conceptual only. */
-function makeNet(seed: number, count: number, pulses: number, scale: number): Net {
-  const rand = rng(seed);
-  const pts: [number, number, number][] = [];
-  let guard = 0;
-  while (pts.length < count && guard++ < 4000) {
-    const p: [number, number, number] = [(rand() - 0.5) * 6, (rand() - 0.5) * 3.2, (rand() - 0.5) * 3.2];
-    if ((p[0] / 3) ** 2 + (p[1] / 1.6) ** 2 + (p[2] / 1.6) ** 2 > 1) continue;
-    if (pts.some((q) => (q[0] - p[0]) ** 2 + (q[1] - p[1]) ** 2 + (q[2] - p[2]) ** 2 < 0.5)) continue;
-    pts.push(p);
-  }
-  const seen = new Set<string>();
-  const links: [number, number][] = [];
-  pts.forEach((a, i) => {
-    pts
-      .map((b, j) => ({ j, d: (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2 }))
-      .filter((o) => o.j !== i)
-      .sort((x, y) => x.d - y.d)
-      .slice(0, 3)
-      .forEach((o) => {
-        const k = i < o.j ? `${i}-${o.j}` : `${o.j}-${i}`;
-        if (!seen.has(k) && o.d < 6) { seen.add(k); links.push([i, o.j]); }
-      });
-  });
-  const lp: number[] = [];
-  links.forEach(([a, b]) => lp.push(...pts[a], ...pts[b]));
-  const lineGeo = new BufferGeometry();
-  lineGeo.setAttribute("position", new Float32BufferAttribute(lp, 3));
-  const lineMat = new LineBasicMaterial({ color: "#1469df", transparent: true, opacity: 0.4, depthWrite: false });
-  const nodeGeo = new OctahedronGeometry(0.075);
-  const nodeMat = new MeshBasicMaterial({ color: "#0b3d91", transparent: true, depthWrite: false });
-  const nodes = new InstancedMesh(nodeGeo, nodeMat, pts.length);
-  const dummy = new Object3D();
-  const sizes = pts.map(() => 0.6 + Math.pow(rand(), 2) * 1.5);
-  const pPos = new Float32Array(pulses * 3);
-  const pGeo = new BufferGeometry();
-  pGeo.setAttribute("position", new Float32BufferAttribute(pPos, 3));
-  const pMat = new PointsMaterial({ color: "#ffffff", size: 0.26, sizeAttenuation: true, transparent: true, opacity: 0.95, blending: AdditiveBlending, depthWrite: false });
-  const st = Array.from({ length: pulses }, () => ({ id: Math.floor(rand() * 999), t: rand(), v: 0.14 + rand() * 0.25 }));
-  const group = new Group();
-  group.scale.setScalar(scale);
-  group.add(new LineSegments(lineGeo, lineMat), nodes, new Points(pGeo, pMat));
-
-  return {
-    group,
-    update(t, dt, animated) {
-      for (let i = 0; i < pts.length; i++) {
-        dummy.position.set(pts[i][0], pts[i][1], pts[i][2]);
-        dummy.scale.setScalar(sizes[i] * (animated ? 1 + Math.sin(t * 1.4 + i * 1.9) * 0.18 : 1));
-        dummy.updateMatrix();
-        nodes.setMatrixAt(i, dummy.matrix);
-      }
-      nodes.instanceMatrix.needsUpdate = true;
-      if (!animated) { pMat.opacity = 0; return; }
-      pMat.opacity = 0.95;
-      for (let i = 0; i < pulses; i++) {
-        const s = st[i];
-        s.t += dt * s.v;
-        if (s.t > 1) { s.t = 0; s.id = Math.floor(Math.random() * 999); }
-        const [a, b] = links[s.id % links.length];
-        pPos[i * 3] = MathUtils.lerp(pts[a][0], pts[b][0], s.t);
-        pPos[i * 3 + 1] = MathUtils.lerp(pts[a][1], pts[b][1], s.t);
-        pPos[i * 3 + 2] = MathUtils.lerp(pts[a][2], pts[b][2], s.t);
-      }
-      (pGeo.getAttribute("position") as Float32BufferAttribute).needsUpdate = true;
-    },
-    dispose() {
-      [lineGeo, nodeGeo, pGeo].forEach((g) => g.dispose());
-      [lineMat, nodeMat, pMat].forEach((m) => m.dispose());
-      nodes.dispose();
-    },
-  };
-}
-
 /**
  * Site-wide sky: layered cloud banks at different depths, a camera that flies through them as the page scrolls,
- * and two conceptual node networks that emerge from the clouds. State lives outside React; rendering pauses when hidden.
+ * and State lives outside React; rendering pauses when hidden.
  */
 export function createSky(canvas: HTMLCanvasElement, root: HTMLElement, opts: SkyOptions) {
   const renderer = new WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: "high-performance" });
@@ -224,15 +148,15 @@ export function createSky(canvas: HTMLCanvasElement, root: HTMLElement, opts: Sk
         uNoise: { value: noise },
         uTime: { value: 0 },
         uSpeed: { value: 0.0035 + rand() * 0.004 },
-        uScale: { value: 0.75 + rand() * 0.5 },
-        uCover: { value: 0.4 + rand() * 0.05 },
+        uScale: { value: 0.8 + rand() * 0.45 },
+        uCover: { value: 0.5 + rand() * 0.05 },
         uOpacity: { value: 0 },
         uAspect: { value: w / h },
         uCalm: { value: 0 },
         uNear: { value: 3.5 },
         uSeed: { value: [rand() * 4, rand() * 4] },
         uTint: { value: new Color("#ffffff") },
-        uShade: { value: new Color("#aecdf0") },
+        uShade: { value: new Color("#a9c8ec") },
         uHaze: { value: new Color("#cfe6ff") },
       },
     });
@@ -245,13 +169,6 @@ export function createSky(canvas: HTMLCanvasElement, root: HTMLElement, opts: Sk
     layers.push({ mesh, mat, base: 0.9 - f * 0.12, i });
   }
 
-  // ---- technology emerging from the clouds ---------------------------------------------------------------------
-  const netA = makeNet(3, lite ? 16 : 26, lite ? 8 : 16, 1.9);
-  netA.group.position.set(8.5, 1.2, -6);
-  const netB = makeNet(9, lite ? 14 : 22, lite ? 6 : 12, 2.3);
-  netB.group.position.set(-9, -1, -30);
-  scene.add(netA.group, netB.group);
-
   // ---- state ------------------------------------------------------------------------------------------------------
   const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
   let width = 1, height = 1, visible = true, raf = 0, lost = false;
@@ -260,7 +177,7 @@ export function createSky(canvas: HTMLCanvasElement, root: HTMLElement, opts: Sk
   let intro = opts.reducedMotion || software ? 1 : 0;
   let slow = 0.016, frames = 0;
   const cam = { p: 0 };
-  const maxDpr = lite ? 0.6 : 0.85; // clouds are soft: low resolution is invisible and much cheaper
+  const maxDpr = lite ? 0.7 : 1; // clouds are soft: low resolution is invisible and much cheaper
 
   function resize() {
     width = Math.max(1, root.clientWidth);
@@ -300,10 +217,6 @@ export function createSky(canvas: HTMLCanvasElement, root: HTMLElement, opts: Sk
       const reveal = smooth(intro * 1.7 - (1 - l.i / (N - 1)) * 0.7);
       u.uOpacity.value = l.base * reveal;
     });
-    netA.group.rotation.y = animated ? Math.sin(t * 0.1) * 0.12 : 0;
-    netA.group.position.y = 1.2 + (animated ? Math.sin(t * 0.4) * 0.15 : 0);
-    netA.update(t, dt, animated);
-    netB.update(t, dt, animated);
   }
 
   function draw() {
@@ -363,8 +276,6 @@ export function createSky(canvas: HTMLCanvasElement, root: HTMLElement, opts: Sk
     geo.dispose();
     noise.dispose();
     layers.forEach((l) => l.mat.dispose());
-    netA.dispose();
-    netB.dispose();
     renderer.dispose();
   };
 }

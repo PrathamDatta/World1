@@ -3,8 +3,10 @@ import Link from "next/link";
 import PageSchema from "@/components/PageSchema";
 import { pageMetadata } from "@/lib/seo";
 import CtaBand from "@/components/CtaBand";
+import CloudExplainer from "@/components/CloudExplainer";
 import HostingCompare from "@/components/HostingCompare";
 import Marquee from "@/components/Marquee";
+import ServiceWorld from "@/components/ServiceWorld";
 import SolutionSelector from "@/components/SolutionSelector";
 import Split from "@/components/Split";
 import FocusZone from "@/components/stage/FocusZone";
@@ -96,6 +98,20 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section section--mist" aria-labelledby="world-title">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow">Our services</p>
+            <Split as="h2" id="world-title" text="Explore each *layer* of the stack" className="display" />
+            <p className="lede">
+              Choose a service to see what it covers. These illustrations are a conceptual map of our services, not
+              diagrams of our infrastructure.
+            </p>
+          </div>
+          <ServiceWorld />
+        </div>
+      </section>
+
       <section className="section section--navy cloud-band" aria-labelledby="cloud-title">
         <span className="bgword" aria-hidden="true" data-parallax>CLOUD</span>
         <div className="wrap split">
@@ -109,6 +125,20 @@ export default function Home() {
             <p><Link href="/cloud" className="btn btn--light" data-cursor="Open">See cloud options</Link></p>
           </div>
           <HostingCompare />
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="explain-title">
+        <div className="wrap">
+          <div className="section-head">
+            <p className="eyebrow">How it works</p>
+            <Split as="h2" id="explain-title" text="Cloud infrastructure, *made* understandable" className="display" />
+            <p className="lede">
+              A simplified picture of how a website runs in the cloud. It is a conceptual diagram, not a map of our own
+              infrastructure.
+            </p>
+          </div>
+          <CloudExplainer />
         </div>
       </section>
 

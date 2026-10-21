@@ -55,7 +55,7 @@ export default function CloudExplainer() {
   return (
     <div className="xplain" ref={ref} data-active={active ?? ""}>
       <div className="xplain__figure">
-        <svg viewBox="0 0 960 520" role="img" aria-label="Conceptual diagram: visitors reach a website hosted on a virtual partition inside a cloud, which draws on compute, storage and network resources with security and backup around it." focusable="false">
+        <svg viewBox="0 28 960 440" role="img" aria-label="Conceptual diagram: visitors reach a website hosted on a virtual partition inside a cloud, which draws on compute, storage and network resources, alongside security and backup." focusable="false">
           <defs>
             <linearGradient id="xCloud" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stopColor="#ffffff" /><stop offset="1" stopColor="#d3e6fa" />
@@ -63,6 +63,7 @@ export default function CloudExplainer() {
           </defs>
 
           {/* revealed infrastructure */}
+          <g transform="translate(0 -56)">
           <g className="x-inner">
             <rect x="170" y="120" width="620" height="290" rx="22" className="x-bay" />
             <path d="M480 410 V470 M300 410 V470 M660 410 V470" className="i-line i-line--dash" />
@@ -95,9 +96,11 @@ export default function CloudExplainer() {
               <rect x="408" y="364" width="144" height="26" rx="8" className="i-unit" />
               {[0, 1, 2, 3, 4, 5].map((k) => <rect key={k} x={420 + k * 22} y="372" width="14" height="10" rx="2" className="i-slot" />)}
             </g>
-            <g {...on("protect")} className="x-part">
-              <path d="M470 20 L524 36 V80 C524 110 502 130 470 144 C438 130 416 110 416 80 V36 Z" className="i-shield" transform="translate(10 -6) scale(.86)" />
-              <path d="M474 52 v-8 a8 8 0 0 1 16 0 v8 M466 52 h32 v22 h-32z" className="i-line" transform="translate(-2 6) scale(.9)" />
+            <g {...on("protect")} className="x-part x-shield">
+              <path d="M470 20 L524 36 V80 C524 110 502 130 470 144 C438 130 416 110 416 80 V36 Z" className="i-shield" transform="translate(204 334) scale(.4) translate(-416 -20)" />
+              <path d="M462 72 v-8 a8 8 0 0 1 16 0 v8 M454 72 h32 v26 h-32z" className="i-line" transform="translate(204 334) scale(.4) translate(-416 -20)" />
+              <text x="260" y="360" className="x-label">SECURITY</text>
+              <text x="260" y="376" className="x-label">&amp; BACKUP</text>
             </g>
 
             {/* paths between parts, with travelling pulses */}
@@ -118,6 +121,7 @@ export default function CloudExplainer() {
             <text x="300" y="506" className="i-text" textAnchor="middle">visitors</text>
             <text x="480" y="506" className="i-text" textAnchor="middle">your customers</text>
             <text x="660" y="506" className="i-text" textAnchor="middle">your team</text>
+          </g>
           </g>
 
           {/* the cloud that opens */}

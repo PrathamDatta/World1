@@ -9,7 +9,9 @@ const reveal: [string, string][] = [
   [".product, .panel, .solution-card, .tile", "scale"],
   [".reasons li, .col-block, .stages li, .contact-details li", "up"],
   [".quote", "fade"],
-  [".faq, .tabs, .compare, .hcompare, .domain-box", "up"],
+  [".faq, .tabs, .compare, .hcompare, .domain-box, .xplain__figure, .svc__stage", "up"],
+  [".xplain__legend li, .svc__panel", "scale"],
+  [".svc__rail li", "left"],
 ];
 
 const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -22,12 +24,26 @@ export default function PageEffects() {
   useEffect(() => {
     if (reduced()) return;
     const marked: Element[] = [];
+    const timers: number[] = [];
+    // Once an element has finished revealing, hand it back to its own styles: the reveal's transform/transition would
+    // otherwise keep overriding the card hover lift and its border/shadow transitions.
+    const settle = (el: Element) => {
+      if (!el.classList.contains("rv")) return;
+      const delay = Number((el as HTMLElement).style.getPropertyValue("--d") || 0) * 90;
+      timers.push(
+        window.setTimeout(() => {
+          el.classList.remove("rv", "in", ...Array.from(el.classList).filter((c) => c.startsWith("rv--")));
+          (el as HTMLElement).style.removeProperty("--d");
+        }, 950 + delay),
+      );
+    };
     const io = new IntersectionObserver(
       (entries) =>
         entries.forEach((en) => {
           if (en.isIntersecting) {
             en.target.classList.add("in");
             io.unobserve(en.target);
+            settle(en.target);
           }
         }),
       { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
@@ -46,6 +62,7 @@ export default function PageEffects() {
     });
     return () => {
       io.disconnect();
+      timers.forEach((t) => window.clearTimeout(t));
       marked.forEach((el) => el.classList.remove("rv", "in"));
     };
   }, [pathname]);
@@ -85,7 +102,7 @@ export default function PageEffects() {
     const move = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return;
       const t = e.target as HTMLElement;
-      const card = t.closest<HTMLElement>(".product, .panel, .solution-card, .tile");
+      const card = t.closest<HTMLElement>(".product, .panel, .solution-card, .tile, .xplain__legend button, .svc__panel");
       const btn = reduced() ? null : t.closest<HTMLElement>(".btn");
       if (magnet && magnet !== btn) { reset(magnet); magnet = null; }
       if (!card && !btn) return;

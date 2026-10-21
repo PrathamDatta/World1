@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { setAscent } from "@/lib/ascent";
 
 type NavigatorWithHints = Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
 
@@ -31,9 +32,11 @@ export default function SkyCanvas() {
       try {
         const { createSky } = await import("./sky");
         if (cancelled) return;
-        dispose = createSky(canvas, root, { lite, reducedMotion, onLost: () => setState("failed") });
+        dispose = createSky(canvas, root, { lite, reducedMotion, onLost: () => { setAscent({ gl: false }); setState("failed"); } });
+        setAscent({ gl: true });
         setState("live");
       } catch {
+        setAscent({ gl: false });
         setState("failed");
       }
     };
@@ -48,12 +51,14 @@ export default function SkyCanvas() {
       window.clearTimeout(timer);
       window.removeEventListener("load", kick);
       dispose?.();
+      setAscent({ gl: false });
     };
   }, []);
 
   return (
     <div className="sky" ref={rootRef} aria-hidden="true" data-state={state}>
       <div className="sky__calm" />
+      <div className="sky__alt" />
       <div className="sky__poster">
         <i /><i /><i /><i />
       </div>

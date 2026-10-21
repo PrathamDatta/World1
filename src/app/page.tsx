@@ -6,7 +6,7 @@ import HostingCompare from "@/components/HostingCompare";
 import SolutionSelector from "@/components/SolutionSelector";
 import Split from "@/components/Split";
 import SkyCanvas from "@/components/sky/SkyCanvas";
-import CloudLayers from "@/components/CloudLayers";
+import CloudAscent from "@/components/CloudAscent";
 import CloudExplainer from "@/components/CloudExplainer";
 import { company } from "@/data/site";
 
@@ -46,19 +46,19 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="zone" id="services" aria-labelledby="services-title">
+        <section className="zone zone--services" id="services" aria-labelledby="services-title">
           <div className="wrap">
-            <div className="zone__head">
+            <div className="zone__head zone__head--tight">
               <p className="eyebrow">Our services</p>
               <Split as="h2" id="services-title" text="SEVEN LAYERS.|ONE CONNECTED CLOUD." className="display" step={80} />
               <p className="lede">
                 Each service is a layer of cloud, and each builds on the one beneath it, from cloud infrastructure at the
-                foundation to the support that looks after it all. Select a layer to explore it. The illustrations are conceptual, not
-                diagrams of our infrastructure.
+                foundation to the support that looks after it all. Keep scrolling to climb through them.
               </p>
             </div>
-            <CloudLayers />
           </div>
+          <CloudAscent />
+          <span id="after-ascent" tabIndex={-1} />
         </section>
 
         <section className="zone zone--explain" id="cloud-explained" aria-labelledby="explain-title">

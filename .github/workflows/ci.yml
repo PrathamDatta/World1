@@ -15,3 +15,7 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run build
+      - name: Static export (cPanel) still builds
+        run: npm run build:static
+        env:
+          NEXT_PUBLIC_SITE_URL: https://ci.example.test

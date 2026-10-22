@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { pages, type PageKey } from "@/data/pages";
 import { company } from "@/data/site";
-import { abs, siteUrl } from "./site";
+import { pageUrl, siteUrl } from "./site";
 
 /** Per-page metadata: unique title/description, plus canonical + Open Graph URL when the site origin is known. */
 export function pageMetadata(key: PageKey): Metadata {
@@ -14,14 +14,14 @@ export function pageMetadata(key: PageKey): Metadata {
   return {
     title,
     description: p.description,
-    ...(known ? { alternates: { canonical: abs(p.path) } } : {}),
+    ...(known ? { alternates: { canonical: pageUrl(p.path) } } : {}),
     openGraph: {
       type: "website",
       siteName: company.name,
       locale: "en_IN",
       title: shareTitle,
       description: p.description,
-      ...(known ? { url: abs(p.path) } : {}),
+      ...(known ? { url: pageUrl(p.path) } : {}),
       images: [image],
     },
     twitter: { card: "summary_large_image", title: shareTitle, description: p.description, images: [image.url] },

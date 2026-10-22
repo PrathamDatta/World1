@@ -27,7 +27,7 @@ export const nav: NavEntry[] = [
     ],
   },
   {
-    label: "Build",
+    label: "Web Development",
     items: [
       { label: "Website Design", href: "/website-design", description: "Website and mobile site builders" },
       { label: "Custom Web Apps", href: "/custom-web-apps", description: "Portals and web applications" },

@@ -4,3 +4,4 @@ next-env.d.ts
 *.tsbuildinfo
 .env*.local
 out
+public/contact-config.php

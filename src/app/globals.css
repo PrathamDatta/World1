@@ -576,3 +576,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .xplain__legend button:hover { transform: translateY(-6px); border-color: var(--ink); box-shadow: 0 30px 50px -30px rgba(16, 36, 58, .5); }
 .xplain__legend button[aria-pressed="true"]:not(:hover) { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
 @media (prefers-reduced-motion: reduce) { .svc [class*="i-"], .xplain [class*="i-"] { animation: none !important; } }
+
+/* contact form: spam-trap field, sending state, result region */
+.hp-field { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+.btn:disabled { opacity: .65; cursor: progress; transform: none; box-shadow: none; }
+.form-result:focus { outline: none; }
+.form-result .err { margin: 0; }

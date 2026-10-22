@@ -1,0 +1,32 @@
+name: Build cPanel zip
+on:
+  workflow_dispatch:
+    inputs:
+      site_url:
+        description: "Live address, e.g. https://www.yourdomain.com (no trailing slash)"
+        required: true
+        type: string
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build static export
+        run: npm run build:static
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ inputs.site_url }}
+      - name: Check output
+        run: |
+          test -f out/index.html
+          test -f out/404.html
+          echo "files: $(find out -type f | wc -l)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: adinet-cpanel-site
+          path: out/
+          if-no-files-found: error

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { pageList } from "@/data/pages";
-import { abs, isIndexable, siteUrl } from "@/lib/site";
+import { isIndexable, pageUrl, siteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -8,5 +8,5 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteUrl();
   if (!base || !isIndexable()) return [];
-  return pageList.map((p) => ({ url: abs(p.path) }));
+  return pageList.map((p) => ({ url: pageUrl(p.path) }));
 }

@@ -121,7 +121,9 @@ function DesktopGroup({
 }
 
 export default function Header() {
-  const pathname = usePathname();
+  // Static hosting serves pages at /about/ (trailing slash); normalise so the active-page state matches either form.
+  const rawPath = usePathname();
+  const pathname = rawPath.length > 1 ? rawPath.replace(/\/+$/, "") : rawPath;
   const [opened, setOpened] = useState<Opened>(null);
   // Menu state is tied to the pathname it was opened on, so navigating always closes it without an effect.
   const [menu, setMenu] = useState<{ open: boolean; path: string }>({ open: false, path: pathname });

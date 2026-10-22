@@ -1,6 +1,6 @@
 import { pageList, pages } from "@/data/pages";
 import { company } from "@/data/site";
-import { abs } from "@/lib/site";
+import { pageUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -18,7 +18,7 @@ export function GET() {
     `- Phone / WhatsApp: ${company.phone}`,
     "",
     "## Pages",
-    ...pageList.map((p) => `- [${p.name}](${abs(p.path)}): ${p.blurb}`),
+    ...pageList.map((p) => `- [${p.name}](${pageUrl(p.path)}): ${p.blurb}`),
     "",
   ];
   return new Response(lines.join("\n"), { headers: { "content-type": "text/plain; charset=utf-8" } });

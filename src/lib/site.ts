@@ -19,4 +19,15 @@ export function isIndexable(): boolean {
 }
 
 /** Absolute URL for a path. The root is written without a trailing slash, matching the canonical URL Next.js emits for it. */
+/** Static export on Apache serves pages at /about/ (trailing slash); Vercel/Next serve /about. Canonical URLs must match what is served. */
+const trailingSlash = process.env.STATIC_EXPORT === "1";
+
+/** Absolute URL of a page. */
+export const pageUrl = (path: string) => {
+  const origin = siteUrl();
+  if (path === "/") return origin ? `${origin}${trailingSlash ? "/" : ""}` : "/";
+  return `${origin ?? ""}${path}${trailingSlash ? "/" : ""}`;
+};
+
+/** Absolute URL of a file/asset (never gets a trailing slash). */
 export const abs = (path: string) => (path === "/" ? (siteUrl() ?? "/") : `${siteUrl() ?? ""}${path}`);

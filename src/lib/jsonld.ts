@@ -1,7 +1,7 @@
 import { faqs } from "@/data/faqs";
 import { pages, servicePages, type PageKey } from "@/data/pages";
 import { company } from "@/data/site";
-import { abs } from "./site";
+import { abs, pageUrl } from "./site";
 
 const ORG = () => abs("/") + "#organization";
 const SITE = () => abs("/") + "#website";
@@ -46,7 +46,7 @@ export function siteGraph() {
 /** Page-level graph: WebPage (or FAQPage/AboutPage/ContactPage), breadcrumb and, where genuine, a Service. */
 export function pageGraph(key: PageKey) {
   const p = pages[key];
-  const url = abs(p.path);
+  const url = pageUrl(p.path);
   const faq = faqs[key];
   const types = [p.schemaType ?? "WebPage", ...(faq ? ["FAQPage"] : [])];
   const graph: Record<string, unknown>[] = [

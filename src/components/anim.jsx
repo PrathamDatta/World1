@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useIsoLayoutEffect } from './iso.js'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -36,7 +36,7 @@ export function Split({ as: Tag = 'h2', text, em = [], className = '', ...rest }
  * Everything is visible by default; motion is applied only when reduced-motion is off.
  */
 export function usePageAnimations(ref, deps = []) {
-  useLayoutEffect(() => {
+  useIsoLayoutEffect(() => {
     const mm = gsap.matchMedia()
     const ctx = gsap.context(() => {
       mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -44,8 +44,8 @@ export function usePageAnimations(ref, deps = []) {
         if (!root) return
         root.querySelectorAll('[data-split]').forEach((el) => {
           const inner = el.querySelectorAll('.sw > span')
-          gsap.from(inner, {
-            yPercent: 115,
+          gsap.fromTo(inner, { yPercent: 115 }, {
+            yPercent: 0,
             duration: 1.1,
             ease: 'expo.out',
             stagger: 0.045,
@@ -55,9 +55,9 @@ export function usePageAnimations(ref, deps = []) {
         })
         root.querySelectorAll('[data-reveal]').forEach((el) => {
           const d = parseFloat(el.dataset.delay || '0')
-          gsap.from(el, {
-            y: 36,
-            opacity: 0,
+          gsap.fromTo(el, { y: 36, opacity: 0 }, {
+            y: 0,
+            opacity: 1,
             duration: 1,
             delay: d,
             ease: 'power3.out',
@@ -65,9 +65,9 @@ export function usePageAnimations(ref, deps = []) {
           })
         })
         root.querySelectorAll('[data-stagger]').forEach((el) => {
-          gsap.from(el.children, {
-            y: 30,
-            opacity: 0,
+          gsap.fromTo(el.children, { y: 30, opacity: 0 }, {
+            y: 0,
+            opacity: 1,
             duration: 0.9,
             ease: 'power3.out',
             stagger: 0.09,

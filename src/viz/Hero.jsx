@@ -1,4 +1,5 @@
-import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
+import {useEffect, useMemo, useRef} from 'react'
+import { useIsoLayoutEffect } from '../components/iso.js'
 import gsap from 'gsap'
 import { prefersReduced } from '../components/anim.jsx'
 
@@ -94,7 +95,7 @@ export function HeroScene() {
     [],
   )
 
-  useLayoutEffect(() => {
+  useIsoLayoutEffect(() => {
     const el = root.current
     const reduced = prefersReduced()
     const ctx = gsap.context(() => {

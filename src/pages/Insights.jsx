@@ -10,7 +10,7 @@ export default function Insights() {
   usePageAnimations(root)
   return (
     <div ref={root}>
-      <Seo title="Insights" description="Perspectives on regulatory strategy and engineering from Caliber Assurance Services." />
+      <Seo title="Insights on Regulatory Strategy" description="Perspectives on regulatory strategy and engineering from Caliber Assurance Services." />
       <PageHero crumbs={[[null, 'Insights']]} eyebrow="Insights" title="Notes from the regulatory front." em={['regulatory']} />
       <section className="section">
         <div className="wrap">

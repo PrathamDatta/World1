@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Seo from '../components/Seo.jsx'
 import PageHero from '../components/PageHero.jsx'
 import { Split, usePageAnimations } from '../components/anim.jsx'
-import { EDGE, WHY, TEAM, CERT } from '../data/content.js'
+import { EDGE, WHY, TEAM, CERT, FAQ } from '../data/content.js'
 
 export default function About() {
   const root = useRef(null)
@@ -11,7 +11,7 @@ export default function About() {
   const [lead, ...rest] = TEAM
   return (
     <div ref={root}>
-      <Seo title="Company" description="Caliber Assurance Services is an ISO 13485 / ISO 9001 certified design consulting firm — a group of young passionate engineers with a singular focus on the success of their clients." />
+      <Seo title="About Us — ISO 13485 Design Consulting Firm" description="About Caliber Assurance Services, an ISO 13485 / ISO 9001 certified design consulting firm in Bengaluru: its approach, leadership, and answers to common questions." />
       <PageHero
         crumbs={[[null, 'Company']]}
         eyebrow="About Caliber"
@@ -88,6 +88,23 @@ export default function About() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section section--tight" aria-labelledby="faq-h">
+        <div className="wrap two-col">
+          <div className="sticky-h">
+            <span className="mono eyebrow">At a glance</span>
+            <h2 id="faq-h" className="display h-md" style={{ marginTop: 18 }}>Caliber, in questions and answers.</h2>
+          </div>
+          <dl className="faq" data-stagger>
+            {FAQ.map((f) => (
+              <div key={f.q}>
+                <dt>{f.q}</dt>
+                <dd>{f.a}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

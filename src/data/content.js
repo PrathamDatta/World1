@@ -68,6 +68,7 @@ export const INDUSTRIES = [
   {
     id: 'medical',
     slug: 'medical-devices',
+    seoTitle: 'Medical Device Engineering & Regulatory Services',
     name: 'Medical Devices',
     short: 'Medical',
     lede: 'Medical device R&D outsourcing is increasing — and the design must be regulation-ready from the start.',
@@ -97,6 +98,7 @@ export const INDUSTRIES = [
   {
     id: 'life',
     slug: 'life-sciences',
+    seoTitle: 'Life Sciences GxP, Qualification & Validation',
     name: 'Life Sciences',
     short: 'Life Sciences',
     lede: 'Qualification, validation and remediation services for the pharma industry.',
@@ -109,6 +111,7 @@ export const INDUSTRIES = [
   {
     id: 'aero',
     slug: 'aerospace-defence',
+    seoTitle: 'Aerospace & Defence Engineering, System Safety',
     name: 'Aerospace & Defence Engineering',
     short: 'Aerospace & Defence',
     lede: 'R&D, regulatory compliance and system safety for avionics, defence and automotive systems.',
@@ -197,6 +200,7 @@ export const CASES = [
   {
     slug: 'end-to-end-product-consultancy',
     n: '01',
+    seoTitle: 'Case study: end-to-end product consultancy',
     title: 'End-to-end product consultancy for a medical devices start-up',
     kicker: 'Medical devices · Start-up',
     kind: 'loop',
@@ -214,6 +218,7 @@ export const CASES = [
   {
     slug: 'vital-monitoring-hardware-design',
     n: '02',
+    seoTitle: 'Case study: wireless vital monitoring device',
     title: 'Hardware design of a vital monitoring device',
     kicker: 'Medical devices · Vital monitoring',
     kind: 'ecg',
@@ -225,6 +230,7 @@ export const CASES = [
   {
     slug: 'pft-device-design-engineering',
     n: '03',
+    seoTitle: 'Case study: forced-oscillation PFT device',
     title: 'Design and engineering activities for a PFT device',
     kicker: 'Medical devices · Pulmonary function',
     kind: 'fot',
@@ -282,6 +288,7 @@ export const TEAM = [
 
 // src: /blog.html — dated 25 August 2015, by Jayavanth Kamath
 export const POST = {
+  seoDescription: 'A MedTech program team needed fast-track regulatory approval for South East Asia. How Caliber changed the design and passed design qualification.',
   slug: 'are-you-wasting-your-time-handling-regulatory-issues',
   title: 'Are you wasting your time handling regulatory issues?',
   date: '2015-08-25',
@@ -316,3 +323,35 @@ export const CAREER = {
   ],
   qual: 'Diploma / graduate / post-graduate in Electronics Engineering or Software Engineering with 8–15 years of experience',
 }
+
+// Question-and-answer pairs for the About page. Every answer restates facts published on caliberassurance.com.
+export const FAQ = [
+  {
+    q: 'What is Caliber Assurance Services?',
+    a: 'Caliber Assurance Services is an ISO 13485 / ISO 9001 certified design consulting firm based in Bengaluru, India. It offers Design & Engineering Solutions, Assurance Solutions and Consulting, with a strong focus on regulatory compliance for Medical Devices, Avionics and related industries.',
+  },
+  {
+    q: 'Which industries does Caliber serve?',
+    a: 'Medical devices, life sciences (the pharma industry), and aerospace & defence engineering — which covers avionics, defence and automotive systems.',
+  },
+  {
+    q: 'What services does Caliber provide?',
+    a: 'Design & Engineering (system design, embedded programming, electronic hardware and mechanical design, test jigs and fixtures, value analysis and value engineering); Verification & Validation / Assurance (regulatory compliance testing, software validation, risk management and hazard analysis, reliability assurance, RCA / CAPA); and Consulting (Make In India, product homologation, on-site representation, assured design, training, quality systems remediation).',
+  },
+  {
+    q: 'Which standards and regulations does Caliber work with?',
+    a: 'For medical devices: 21 CFR Part 820, ISO 13485, IEC 62304, ISO 14971, IEC 62366 and IEC 60601-1. For the pharma industry: GxP. Its founder specialises in ISO, FDA, FAA and IEC requirements.',
+  },
+  {
+    q: 'Can Caliber help launch a product in several markets at once?',
+    a: 'Yes. Caliber designs solutions to help customers launch products for the global market simultaneously, treating regulatory requirements as critical to quality from the start of design.',
+  },
+  {
+    q: 'Who leads Caliber?',
+    a: 'Jay Kamath is the Founder and Senior Principal Consultant — an electrical engineer with over 24 years of system engineering, quality and regulatory assurance experience and a Certified Lead Auditor. He previously worked at Larsen & Toubro, GE Healthcare and Wipro Technologies.',
+  },
+  {
+    q: 'Where is Caliber located and how can I contact it?',
+    a: 'Caliber is at # 3499, 14th Main Road, HAL II Stage, Indiranagar, Bangalore, India – 560 008. Phone: 080 25283196. Email: operations@caliberassurance.com. The office works Monday to Saturday, 08:00 – 20:00, and is closed on Sundays and holidays.',
+  },
+]

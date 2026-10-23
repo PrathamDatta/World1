@@ -13,7 +13,7 @@ export default function Post() {
   if (slug !== POST.slug) return <NotFound />
   return (
     <div ref={root}>
-      <Seo title={POST.title} description={POST.body[0]} />
+      <Seo title={POST.title} description={POST.seoDescription} />
       <PageHero crumbs={[['/insights', 'Insights'], [null, 'Article']]} eyebrow={`${POST.category} · ${POST.dateLabel} · ${POST.author}`} title={POST.title} />
       <section className="section">
         <div className="wrap">

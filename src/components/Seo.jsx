@@ -1,11 +1,20 @@
 import { useEffect } from 'react'
 
-const BASE = 'Caliber Assurance Services'
+export const BASE = 'Caliber Assurance Services'
+export const HOME_TITLE = 'Caliber Assurance | Medical Device & Avionics Engineering, Bengaluru'
 
-/** Minimal per-route metadata (title, description, canonical). */
+export const fullTitle = (title) => (title ? `${title} | Caliber Assurance` : HOME_TITLE)
+
+/**
+ * Per-route metadata. On the server (pre-render) it records the values for the head injector;
+ * in the browser it keeps title, description and canonical in sync during client-side navigation.
+ */
 export default function Seo({ title, description }) {
+  const t = fullTitle(title)
+  if (typeof window === 'undefined') globalThis.__seo = { title: t, description }
+
   useEffect(() => {
-    document.title = title ? `${title} — ${BASE}` : `${BASE} — Globally compliant engineering`
+    document.title = t
     let m = document.querySelector('meta[name="description"]')
     if (!m) {
       m = document.createElement('meta')
@@ -14,12 +23,7 @@ export default function Seo({ title, description }) {
     }
     if (description) m.content = description
     let c = document.querySelector('link[rel="canonical"]')
-    if (!c) {
-      c = document.createElement('link')
-      c.rel = 'canonical'
-      document.head.appendChild(c)
-    }
-    c.href = window.location.origin + window.location.pathname
-  }, [title, description])
+    if (c) c.href = c.href.replace(/(https?:\/\/[^/]+).*/, '$1') + window.location.pathname.replace(/\/$/, '')
+  }, [t, description])
   return null
 }

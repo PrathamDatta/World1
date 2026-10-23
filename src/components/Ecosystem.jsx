@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import {useCallback, useEffect, useRef, useState} from 'react'
+import { useIsoLayoutEffect } from './iso.js'
 import { Link } from 'react-router-dom'
 import { PILLARS, INDUSTRIES, LINKS, STAGES } from '../data/content.js'
 
@@ -43,7 +44,7 @@ export default function Ecosystem() {
     setEdges(out)
   }, [])
 
-  useLayoutEffect(() => {
+  useIsoLayoutEffect(() => {
     measure()
     const ro = new ResizeObserver(measure)
     ro.observe(box.current)

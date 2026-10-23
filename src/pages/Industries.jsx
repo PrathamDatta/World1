@@ -11,7 +11,7 @@ export default function Industries() {
   usePageAnimations(root)
   return (
     <div ref={root}>
-      <Seo title="Industry verticals" description="Caliber serves avionics, defence, life science and medical device organisations with System Safety 2.0 thinking." />
+      <Seo title="Industries Served — System Safety 2.0" description="Caliber serves avionics, defence, life science and medical device organisations with System Safety 2.0 thinking." />
       <PageHero
         crumbs={[[null, 'Industries']]}
         eyebrow="Industry verticals"

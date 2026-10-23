@@ -11,7 +11,7 @@ export default function Services() {
   usePageAnimations(root)
   return (
     <div ref={root}>
-      <Seo title="Services" description="Design & engineering, verification & validation / assurance, and consulting services from Caliber Assurance Services." />
+      <Seo title="Design, Assurance & Regulatory Consulting Services" description="Design & engineering, verification & validation / assurance, and consulting services from Caliber Assurance Services." />
       <PageHero
         crumbs={[[null, 'Services']]}
         eyebrow="Our services"

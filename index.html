@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      // Pre-hide reveal targets only when JS + motion are available; a timeout guarantees content shows regardless.
+      (function () {
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          var h = document.documentElement
+          h.classList.add('anim')
+          setTimeout(function () { h.classList.remove('anim') }, 6000)
+        }
+      })()
+    </script>
     <meta name="theme-color" content="#ffffff" />
     <title>Caliber Assurance Services — Globally compliant engineering</title>
     <meta name="description" content="ISO 13485 / ISO 9001 certified design consulting firm in Bengaluru: design & engineering, verification & validation, and regulatory consulting for medical devices, life sciences and aerospace & defence." />

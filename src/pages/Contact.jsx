@@ -31,7 +31,7 @@ export default function Contact() {
 
   return (
     <div ref={root}>
-      <Seo title="Contact" description="Contact Caliber Assurance Services, 3499 14th Main Road, HAL II Stage, Indiranagar, Bangalore 560008. Call 080 25283196." />
+      <Seo title="Contact — Bengaluru Office" description="Contact Caliber Assurance Services, 3499 14th Main Road, HAL II Stage, Indiranagar, Bangalore 560008. Call 080 25283196." />
       <PageHero crumbs={[[null, 'Contact']]} eyebrow="Contact" title="Can we help?" em={['help?']} lede="Tell us about your device or system — we’ll help you understand the regulatory landscape and plan the path to market." />
       <section className="section">
         <div className="wrap contact-grid">

@@ -18,7 +18,7 @@ export default function CaseStudy() {
   const next = CASES[(i + 1) % CASES.length]
   return (
     <div ref={root} key={slug}>
-      <Seo title={c.title} description={c.summary} />
+      <Seo title={c.seoTitle} description={`${c.title}. ${c.summary}`.slice(0, 158)} />
       <PageHero crumbs={[['/case-studies', 'Case studies'], [null, `Case study ${c.n}`]]} eyebrow={`Case study ${c.n} · ${c.kicker}`} title={c.title} />
       <section className="section section--tight">
         <div className="wrap">

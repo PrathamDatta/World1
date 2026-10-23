@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import {useCallback, useEffect, useRef, useState} from 'react'
+import { useIsoLayoutEffect } from '../components/iso.js'
 import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -18,7 +19,7 @@ function Lifecycle() {
   const [stage, setStage] = useState(0)
   const last = useRef(0)
 
-  useLayoutEffect(() => {
+  useIsoLayoutEffect(() => {
     const st = ScrollTrigger.create({
       trigger: track.current,
       start: 'top top',
@@ -131,7 +132,7 @@ export default function Home() {
 
   return (
     <div ref={root}>
-      <Seo description="ISO 13485 / ISO 9001 certified design consulting firm in Bengaluru. Design & engineering, verification & validation and regulatory consulting for medical devices, life sciences and aerospace & defence." />
+      <Seo description="ISO 13485 / ISO 9001 certified design consulting in Bengaluru: engineering, V&V and regulatory compliance for medical devices, pharma and avionics." />
 
       {/* HERO */}
       <section className="hero" aria-label="Introduction">

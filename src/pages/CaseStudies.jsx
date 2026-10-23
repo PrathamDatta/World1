@@ -11,7 +11,7 @@ export default function CaseStudies() {
   usePageAnimations(root)
   return (
     <div ref={root}>
-      <Seo title="Case studies" description="Documented medical-device engagements: end-to-end product consultancy, a wireless vital monitoring device and a forced-oscillation PFT device." />
+      <Seo title="Medical Device Engineering Case Studies" description="Documented medical-device engagements: end-to-end product consultancy, a wireless vital monitoring device and a forced-oscillation PFT device." />
       <PageHero crumbs={[[null, 'Case studies']]} eyebrow="Case studies" title="Credentials, proven in practice." em={['proven']} lede="We have some great case studies to prove credentials." />
       <section className="section">
         <div className="wrap" style={{ display: 'grid', gap: 72 }}>

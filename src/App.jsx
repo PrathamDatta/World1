@@ -1,20 +1,20 @@
-import { Suspense, lazy, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './components/Nav.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
 
-const About = lazy(() => import('./pages/About.jsx'))
-const Services = lazy(() => import('./pages/Services.jsx'))
-const Industries = lazy(() => import('./pages/Industries.jsx'))
-const Industry = lazy(() => import('./pages/Industry.jsx'))
-const CaseStudies = lazy(() => import('./pages/CaseStudies.jsx'))
-const CaseStudy = lazy(() => import('./pages/CaseStudy.jsx'))
-const Insights = lazy(() => import('./pages/Insights.jsx'))
-const Post = lazy(() => import('./pages/Post.jsx'))
-const Careers = lazy(() => import('./pages/Careers.jsx'))
-const Contact = lazy(() => import('./pages/Contact.jsx'))
-const NotFound = lazy(() => import('./pages/NotFound.jsx'))
+import About from './pages/About.jsx'
+import Services from './pages/Services.jsx'
+import Industries from './pages/Industries.jsx'
+import Industry from './pages/Industry.jsx'
+import CaseStudies from './pages/CaseStudies.jsx'
+import CaseStudy from './pages/CaseStudy.jsx'
+import Insights from './pages/Insights.jsx'
+import Post from './pages/Post.jsx'
+import Careers from './pages/Careers.jsx'
+import Contact from './pages/Contact.jsx'
+import NotFound from './pages/NotFound.jsx'
 
 function ScrollReset() {
   const { pathname, hash } = useLocation()
@@ -38,7 +38,6 @@ export default function App() {
       <ScrollReset />
       <Nav />
       <main id="main">
-        <Suspense fallback={<div style={{ minHeight: '100svh' }} aria-busy="true" />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -53,7 +52,6 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </Suspense>
       </main>
       <Footer />
     </>

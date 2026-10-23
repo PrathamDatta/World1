@@ -19,7 +19,7 @@ export default function Industry() {
   const rel = LINKS.filter((l) => l.i === ind.id).map((l) => PILLARS.flatMap((p) => p.services).find((s) => s.id === l.s).name)
   return (
     <div ref={root} key={slug}>
-      <Seo title={ind.name} description={`${ind.lede} ${ind.intro}`.slice(0, 160)} />
+      <Seo title={ind.seoTitle} description={`${ind.lede} ${ind.intro}`.slice(0, 160)} />
       <PageHero crumbs={[['/industries', 'Industries'], [null, ind.short]]} eyebrow="Industry vertical" title={ind.name} lede={ind.lede} />
 
       <section className="section">

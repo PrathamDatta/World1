@@ -44,7 +44,7 @@ export default function LifecycleViz({ stage, arcRef, onPick }) {
 
       {/* L1 — design: solid blocks + traces + pins */}
       <g className={cls(stage, 1)}>
-        <g fill="rgba(245,196,50,.07)" stroke="var(--amber)" strokeWidth="1.2" className="acc-s">
+        <g fill="rgba(var(--amber-rgb),.1)" stroke="var(--amber)" strokeWidth="1.2" className="acc-s">
           <rect x="170" y="196" width="300" height="56" />
           <rect x="170" y="284" width="92" height="84" />
           <rect x="274" y="284" width="92" height="84" />
@@ -65,7 +65,7 @@ export default function LifecycleViz({ stage, arcRef, onPick }) {
 
       {/* L2 — verification: test bus + checks */}
       <g className={cls(stage, 2)}>
-        <rect x="170" y="396" width="300" height="26" fill="rgba(95,211,193,.08)" stroke="var(--teal)" strokeWidth="1" />
+        <rect x="170" y="396" width="300" height="26" fill="rgba(var(--teal-rgb),.1)" stroke="var(--teal)" strokeWidth="1" />
         <text x="320" y="413" textAnchor="middle" className="svg-label mini" style={{ fill: 'var(--teal)', fontSize: 10 }}>Independent verification</text>
         {[216, 320, 424].map((x) => (
           <g key={x}>

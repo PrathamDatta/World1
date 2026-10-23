@@ -44,7 +44,7 @@ function Lifecycle() {
   }, [])
 
   return (
-    <section className="lc" id="lifecycle" aria-label="Engineering lifecycle">
+    <section className="lc dark" id="lifecycle" aria-label="Engineering lifecycle">
       <div className="lc-track" ref={track}>
         <div className="lc-stick">
           <div className="wrap" style={{ display: 'flex', flexDirection: 'column', minHeight: 0, height: '100%' }}>
@@ -208,7 +208,7 @@ export default function Home() {
       </section>
 
       {/* SYSTEM SAFETY */}
-      <section className="section ss">
+      <section className="section ss dark">
         <div className="grid-bg" aria-hidden="true" />
         <div className="wrap ss-grid" style={{ position: 'relative' }}>
           <div>
@@ -225,7 +225,7 @@ export default function Home() {
       </section>
 
       {/* WHY */}
-      <section className="section section--tight" style={{ background: 'var(--ink-2)' }}>
+      <section className="section section--tight">
         <div className="wrap">
           <div className="sec-head">
             <div>
@@ -291,7 +291,7 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="section cta" style={{ background: 'var(--ink-2)' }}>
+      <section className="section cta blue">
         <div className="grid-bg" aria-hidden="true" />
         <div className="wrap" style={{ position: 'relative' }}>
           <span className="mono eyebrow" data-reveal>Can we help?</span>

@@ -21,6 +21,9 @@ export function HeroField() {
     const mouse = { x: -999, y: -999, tx: -999, ty: -999 }
     const GAP = 44
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
+    const cs = getComputedStyle(cv)
+    const fg = cs.getPropertyValue('--fg-rgb').trim() || '35,40,45'
+    const acc = cs.getPropertyValue('--amber-rgb').trim() || '45,111,161'
 
     const size = () => {
       const r = cv.getBoundingClientRect()
@@ -43,7 +46,7 @@ export function HeroField() {
           const md = Math.hypot(x - mouse.x, y - mouse.y)
           const m = Math.max(0, 1 - md / 190)
           a += m * 0.7
-          ctx.fillStyle = m > 0.15 ? `rgba(245,196,50,${Math.min(1, a)})` : `rgba(188,204,232,${a})`
+          ctx.fillStyle = m > 0.15 ? `rgba(${acc},${Math.min(1, a)})` : `rgba(${fg},${a * 0.8})`
           const s = 1 + m * 1.6
           ctx.fillRect(x - s / 2, y - s / 2, s, s)
         }
@@ -128,8 +131,8 @@ export function HeroScene() {
       <svg viewBox="-70 -10 740 620" role="img" aria-label="Diagram of a product moving through design, verification, validation, compliance and lifecycle support around a central core.">
         <defs>
           <radialGradient id="hglow" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stopColor="#f5c432" stopOpacity="0.2" />
-            <stop offset="1" stopColor="#f5c432" stopOpacity="0" />
+            <stop offset="0" style={{ stopColor: 'var(--amber)' }} stopOpacity="0.16" />
+            <stop offset="1" style={{ stopColor: 'var(--amber)' }} stopOpacity="0" />
           </radialGradient>
         </defs>
 
@@ -138,7 +141,7 @@ export function HeroScene() {
           <g className="h-ring spin-rev">
             <circle cx={C} cy={C} r="262" className="stroke-line" />
             {ticks.map((t, i) => (
-              <line key={i} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2} stroke="rgba(188,204,232,.4)" strokeWidth={t.long ? 1.3 : 0.7} />
+              <line key={i} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2} stroke="rgba(var(--fg-rgb),.4)" strokeWidth={t.long ? 1.3 : 0.7} />
             ))}
           </g>
           <circle className="h-ring stroke-line dash" cx={C} cy={C} r="150" />
@@ -146,7 +149,7 @@ export function HeroScene() {
         </g>
 
         <g className="l-mid">
-          <circle className="h-arc" cx={C} cy={C} r="200" fill="none" stroke="rgba(188,204,232,.35)" strokeWidth="1" pathLength="1" />
+          <circle className="h-arc" cx={C} cy={C} r="200" fill="none" stroke="rgba(var(--fg-rgb),.35)" strokeWidth="1" pathLength="1" />
           <circle cx={C} cy={C} r="200" fill="none" stroke="var(--amber)" strokeWidth="1.5" pathLength="1" strokeDasharray="0.1 0.9" className="flow-ring" />
           <circle r="4.5" fill="var(--amber)">
             <animateMotion dur="16s" repeatCount="indefinite" path={`M${C} ${C - 200} A200 200 0 1 1 ${C - 0.01} ${C - 200}`} />

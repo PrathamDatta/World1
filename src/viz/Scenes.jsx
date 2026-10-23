@@ -10,9 +10,9 @@ export function MedicalScene() {
   return (
     <svg viewBox="0 0 500 400" role="img" aria-label="Patient monitor schematic with an ECG trace and three device segments.">
       <rect x="50" y="40" width="400" height="250" rx="6" fill="none" stroke="var(--line-2)" />
-      <rect x="62" y="52" width="376" height="226" fill="rgba(95,211,193,.03)" stroke="var(--line)" />
+      <rect x="62" y="52" width="376" height="226" fill="rgba(var(--teal-rgb),.04)" stroke="var(--line)" />
       {grid}
-      <path d={ecg} fill="none" stroke="rgba(95,211,193,.28)" strokeWidth="1.2" />
+      <path d={ecg} fill="none" stroke="rgba(var(--teal-rgb),.28)" strokeWidth="1.2" />
       <path d={ecg} fill="none" stroke="var(--teal)" strokeWidth="2" pathLength="1" strokeDasharray="0.22 1" className="ecg-scan" />
       <path d="M240 290 v28 M190 322 h120" stroke="var(--line-2)" fill="none" />
       {['Vital Monitoring', 'Medical Imaging', 'Surgical Technologies'].map((t, i) => (
@@ -80,8 +80,8 @@ export function AeroScene() {
     <svg viewBox="0 0 500 400" role="img" aria-label="Aircraft wireframe linked to R&D, regulatory compliance, system safety, and qualification and validation services.">
       <circle cx="250" cy="200" r="170" fill="none" stroke="var(--line)" strokeDasharray="2 6" />
       <circle cx="250" cy="200" r="110" fill="none" stroke="var(--line)" />
-      <g className="radar"><path d="M250 200 L250 30 A170 170 0 0 1 370 80 Z" fill="rgba(245,196,50,.07)" /><line x1="250" y1="200" x2="250" y2="30" stroke="var(--amber)" /></g>
-      <path d={ac} fill="rgba(188,204,232,.04)" stroke="var(--bone-2)" strokeWidth="1.4" pathLength="1" className="draw-in" />
+      <g className="radar"><path d="M250 200 L250 30 A170 170 0 0 1 370 80 Z" fill="rgba(var(--amber-rgb),.08)" /><line x1="250" y1="200" x2="250" y2="30" stroke="var(--amber)" /></g>
+      <path d={ac} fill="rgba(var(--fg-rgb),.04)" stroke="var(--bone-2)" strokeWidth="1.4" pathLength="1" className="draw-in" />
       <path d="M250 70 V320" stroke="var(--line-2)" />
       <path d="M180 200 H320" stroke="var(--line)" strokeDasharray="3 5" />
       {blocks.map((b, i) => {
@@ -115,7 +115,7 @@ export function SafetyViz() {
       <text x="515" y="104" textAnchor="middle" className="svg-label mute" style={{ fontSize: 10 }}>Check</text>
 
       <text x="40" y="190" className="svg-label amber">System Safety 2.0 — cradle to grave</text>
-      <rect x="40" y="224" width="600" height="56" fill="rgba(245,196,50,.07)" stroke="var(--amber)" data-draw />
+      <rect x="40" y="224" width="600" height="56" fill="rgba(var(--amber-rgb),.08)" stroke="var(--amber)" data-draw />
       <path d="M40 252 H640" stroke="var(--amber)" strokeWidth="1.2" strokeDasharray="4 8" className="flow" />
       {marks.map((x, i) => (
         <g key={x}>

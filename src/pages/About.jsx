@@ -81,7 +81,7 @@ export default function About() {
             <div className="roster" data-stagger>
               {rest.map((p) => (
                 <div className="person" key={p.name}>
-                  <span className="mono-badge" style={{ color: '#8a6500', borderColor: 'var(--paper-line)' }} aria-hidden="true">{p.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span>
+                  <span className="mono-badge" style={{ color: 'var(--amber)', borderColor: 'var(--paper-line)' }} aria-hidden="true">{p.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span>
                   <div><b>{p.name}</b><span>{p.role}</span></div>
                   {p.linkedin && <a href={p.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} on LinkedIn`}>LinkedIn ↗</a>}
                 </div>

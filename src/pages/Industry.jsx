@@ -49,7 +49,7 @@ export default function Industry() {
             <span className="mono eyebrow">What we deliver</span>
             <h2 className="display h-md" style={{ marginTop: 18 }}>{ind.servicesTitle}</h2>
             {ind.standards?.length > 0 && (
-              <div className="drivers" style={{ marginTop: 24 }}>{ind.standards.map((s) => <span className="chip" key={s} style={{ color: 'var(--amber)', borderColor: 'rgba(245,196,50,.4)' }}>{s}</span>)}</div>
+              <div className="drivers" style={{ marginTop: 24 }}>{ind.standards.map((s) => <span className="chip" key={s} style={{ color: 'var(--amber)', borderColor: 'rgba(var(--amber-rgb),.4)' }}>{s}</span>)}</div>
             )}
           </div>
           <div>

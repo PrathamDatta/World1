@@ -9,12 +9,13 @@ export const prefersReduced = () =>
 
 /** Wrap each word in a masked span so it can slide up. `em` = words rendered in italic accent. */
 export function Split({ as: Tag = 'h2', text, em = [], className = '', ...rest }) {
-  const emSet = new Set(em.map((w) => w.toLowerCase()))
+  const norm = (w) => w.toLowerCase().replace(/[.,?]/g, '')
+  const emSet = new Set(em.map(norm))
   const words = text.split(' ')
   return (
     <Tag className={className} data-split aria-label={text} {...rest}>
       {words.map((w, i) => {
-        const isEm = emSet.has(w.toLowerCase().replace(/[.,]/g, ''))
+        const isEm = emSet.has(norm(w))
         return (
           <span key={i} aria-hidden="true">
             <span className="sw">

@@ -4,11 +4,11 @@ import { SITE, INDUSTRIES } from '../data/content.js'
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer dark">
       <div className="wrap">
         <div className="f-grid">
           <div>
-            <Logo />
+            <Logo chip />
             <p className="mute" style={{ marginTop: 20, maxWidth: '34ch', fontSize: 15 }}>
               An ISO 13485 / ISO 9001 certified design consulting firm — globally compliant engineering and quality solutions for life science, avionics and other safety-critical domains.
             </p>

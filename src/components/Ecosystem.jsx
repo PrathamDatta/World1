@@ -104,7 +104,7 @@ export default function Ecosystem() {
                 key={i}
                 d={`M${e.x1} ${e.y1} C ${mx} ${e.y1}, ${mx} ${e.y2}, ${e.x2} ${e.y2}`}
                 fill="none"
-                stroke={on ? 'var(--teal)' : 'rgba(188,204,232,.16)'}
+                stroke={on ? 'var(--teal)' : 'rgba(var(--fg-rgb),.16)'}
                 strokeWidth={on ? 1.8 : 1}
                 className={on ? 'flow' : ''}
                 style={{ transition: 'stroke .4s, stroke-width .4s', opacity: sel && !on ? 0.25 : 1 }}

@@ -44,8 +44,10 @@ export function usePageAnimations(ref, deps = []) {
         if (!root) return
         root.querySelectorAll('[data-split]').forEach((el) => {
           const inner = el.querySelectorAll('.sw > span')
-          gsap.fromTo(inner, { yPercent: 115 }, {
+          // y is pinned to 0 on both sides: GSAP otherwise adopts the CSS pre-hide offset (translateY(115%)) as a pixel `y`.
+          gsap.fromTo(inner, { yPercent: 115, y: 0 }, {
             yPercent: 0,
+            y: 0,
             duration: 1.1,
             ease: 'expo.out',
             stagger: 0.045,

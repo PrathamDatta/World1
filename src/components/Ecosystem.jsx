@@ -6,7 +6,15 @@ const ALL = PILLARS.flatMap((p) => p.services.map((s) => ({ ...s, pillar: p.id }
 const svc = (id) => ALL.find((s) => s.id === id)
 const svcName = (id) => svc(id)?.name
 const pillarOf = (sid) => PILLARS.find((p) => p.id === svc(sid)?.pillar)
-const indOf = (id) => INDUSTRIES.find((i) => i.id === id)
+const ALL_IND = { id: 'all', name: 'All industries', short: 'All industries' }
+const indOf = (id) => (id === 'all' ? ALL_IND : INDUSTRIES.find((i) => i.id === id))
+// Services that no single industry page names are linked to a company-wide node: the services table
+// itself is not scoped to one vertical.
+const UNLINKED = ALL.filter((s) => !LINKS.some((l) => l.s === s.id))
+const ALL_LINKS = [
+  ...LINKS,
+  ...UNLINKED.map((s) => ({ s: s.id, i: 'all', why: 'Listed in Caliber’s company-wide services table; no single industry page names it separately.' })),
+]
 const stageOf = (sid) => STAGES.find((st) => st.services.includes(svcName(sid)))
 
 /**
@@ -26,7 +34,7 @@ export default function Ecosystem() {
     const b = box.current
     if (!b) return
     const br = b.getBoundingClientRect()
-    const out = LINKS.map((l) => {
+    const out = ALL_LINKS.map((l) => {
       const a = refs.current['s:' + l.s]?.getBoundingClientRect()
       const c = refs.current['i:' + l.i]?.getBoundingClientRect()
       if (!a || !c) return null
@@ -53,41 +61,41 @@ export default function Ecosystem() {
     if (sel.kind === 'i') return l.i === sel.id
     return svc(l.s).pillar === sel.id
   }
-  const activeLinks = sel ? LINKS.filter(active) : []
+  const activeLinks = sel ? ALL_LINKS.filter(active) : []
   const relS = new Set(activeLinks.map((l) => l.s))
   const relI = new Set(activeLinks.map((l) => l.i))
   const pillarLit = (p) => (sel?.kind === 'p' && sel.id === p.id) || (sel?.kind === 's' && svc(sel.id).pillar === p.id)
   const pick = (kind, id) => setSel((cur) => (cur && cur.kind === kind && cur.id === id ? null : { kind, id }))
 
-  const indNames = (sid) => LINKS.filter((l) => l.s === sid).map((l) => indOf(l.i).short)
+  const indNames = (sid) => ALL_LINKS.filter((l) => l.s === sid).map((l) => indOf(l.i).short)
 
   let panel
   if (!sel) {
-    panel = { title: 'Select a pillar, service or industry', body: 'Rails group the services into Caliber’s three pillars. Lines show which industry pages name each service.', list: [] }
+    panel = { title: 'Select a pillar, service or industry', body: 'Rails group the services into Caliber’s three pillars. Lines show which industry pages name each service; the rest connect to All industries, as the services table is company-wide.', list: [] }
   } else if (sel.kind === 'p') {
     const p = PILLARS.find((x) => x.id === sel.id)
     panel = {
       title: p.title,
       body: `${p.services.length} services in this pillar:`,
-      list: p.services.map((s) => `${s.name} — ${indNames(s.id).join(', ') || 'named on no single industry page'}`),
+      list: p.services.map((s) => `${s.name} — ${indNames(s.id).join(', ') || 'company-wide'}`),
     }
   } else if (sel.kind === 's') {
-    const ls = LINKS.filter((l) => l.s === sel.id)
+    const ls = ALL_LINKS.filter((l) => l.s === sel.id)
     const st = stageOf(sel.id)
     const p = pillarOf(sel.id)
     panel = {
       title: svcName(sel.id),
-      body: ls.length ? `${p.title} · documented for:` : `${p.title}. Caliber’s industry pages don’t name this service separately, so it is linked only to its pillar.`,
+      body: `${p.title} · connected to:`,
       list: [
         ...ls.map((l) => `${indOf(l.i).name} — ${l.why}`),
         ...(st ? [`Lifecycle stage ${st.n}: ${st.name} (our placement of this service in the lifecycle)`] : []),
       ],
     }
   } else {
-    const ls = LINKS.filter((l) => l.i === sel.id)
+    const ls = ALL_LINKS.filter((l) => l.i === sel.id)
     panel = {
       title: indOf(sel.id).name,
-      body: 'Engineering and assurance services documented for this vertical:',
+      body: sel.id === 'all' ? 'Services in the company-wide services table that no single industry page names:' : 'Engineering and assurance services documented for this vertical:',
       list: ls.map((l) => `${svcName(l.s)} — ${l.why}`),
     }
   }
@@ -123,7 +131,7 @@ export default function Ecosystem() {
                 {p.services.map((s) => {
                   const k = 's:' + s.id
                   const isSel = sel?.kind === 's' && sel.id === s.id
-                  const rel = LINKS.filter((l) => l.s === s.id)
+                  const rel = ALL_LINKS.filter((l) => l.s === s.id)
                   const st = stageOf(s.id)
                   return (
                     <div key={s.id}>
@@ -138,9 +146,8 @@ export default function Ecosystem() {
                       </button>
                       {isSel && (
                         <div className="inline-rel">
-                          {rel.map((l) => <Link key={l.i} to={`/industries/${indOf(l.i).slug}`} className="chip">{indOf(l.i).name} →</Link>)}
+                          {rel.map((l) => (l.i === 'all' ? <span key={l.i} className="chip">All industries</span> : <Link key={l.i} to={`/industries/${indOf(l.i).slug}`} className="chip">{indOf(l.i).name} →</Link>))}
                           {st && <span className="chip">Stage {st.n} · {st.name}</span>}
-                          {!rel.length && <span className="mute">Linked to its pillar only; no industry page names it separately.</span>}
                         </div>
                       )}
                     </div>
@@ -170,6 +177,20 @@ export default function Ecosystem() {
               </button>
             )
           })}
+          {(() => {
+            const isSel = sel?.kind === 'i' && sel.id === 'all'
+            return (
+              <button
+                ref={(el) => (refs.current['i:all'] = el)}
+                className={`ind-node ind-all${isSel ? ' sel' : ''}${(sel?.kind === 's' || sel?.kind === 'p') && relI.has('all') ? ' rel' : ''}`}
+                aria-pressed={isSel}
+                onClick={() => pick('i', 'all')}
+              >
+                <span className="mono">{UNLINKED.length} company-wide services</span>
+                <span className="t">All industries</span>
+              </button>
+            )
+          })()}
           <div className="eco-panel-wrap">
             <div className="eco-panel" aria-live="polite">
               <div>
@@ -179,7 +200,7 @@ export default function Ecosystem() {
               <div>
                 <p className="mute" style={{ marginBottom: 12 }}>{panel.body}</p>
                 {panel.list.length > 0 && <ul>{panel.list.map((t) => <li key={t}>{t}</li>)}</ul>}
-                {sel?.kind === 'i' && (
+                {sel?.kind === 'i' && sel.id !== 'all' && (
                   <p style={{ marginTop: 16 }}><Link className="link-arrow" to={`/industries/${indOf(sel.id).slug}`}>Open {indOf(sel.id).short} page →</Link></p>
                 )}
               </div>

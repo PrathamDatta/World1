@@ -455,3 +455,6 @@ button.pillar-title:hover, button.pillar-title.sel { color: var(--bone); }
 .pillar.lit .svc::before { background: var(--amber); width: 16px; }
 .pillar-title.static { cursor: default; }
 .svc { width: 100%; }
+
+.ind-node.ind-all { border-style: dashed; }
+.ind-node.ind-all .t { font-size: 1.5rem; }

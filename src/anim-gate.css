@@ -1,0 +1,11 @@
+/* Pre-hide reveal targets only when JS will animate them (class set by an inline script in <head>),
+   so pre-rendered HTML never flashes visible → hidden → animated. */
+html.anim [data-reveal],
+html.anim [data-stagger] > * { opacity: 0; }
+html.anim [data-split] .sw > span { transform: translateY(115%); }
+
+/* FAQ list (About) */
+.faq { margin: 0; border-top: 1px solid var(--line); }
+.faq > div { padding: 22px 0; border-bottom: 1px solid var(--line); }
+.faq dt { font-family: var(--f-display); font-size: clamp(1.35rem, 2vw, 1.75rem); line-height: 1.15; margin-bottom: 8px; }
+.faq dd { margin: 0; color: var(--bone-2); font-size: 15.5px; max-width: 62ch; }
